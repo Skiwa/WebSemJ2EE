@@ -94,7 +94,7 @@
   WHERE {
     ?picture a ex:Picture;
              ex:event ?event.
-    
+  
     ?event a ex:Festival
   }
   ```
@@ -106,7 +106,7 @@
   WHERE {
     ?picture a ex:Picture;
              ex:event ?event.
-    
+  
     ?event a ?eventType.
     ?eventType rdfs:subClassOf ex:Cultural_Event.
   }
@@ -119,7 +119,7 @@
   WHERE {
     ?picture a ex:Picture;
              ex:event ?event.
-    
+  
     {?event a ex:Festival}UNION{?event a ex:Music_Event}
     ?event ex:featuredArtist ex:Bob_Dylan
   }
@@ -159,14 +159,14 @@
   WHERE {
     ?person a ?personType.
     ?personType rdfs:subClassOf ex:Person.
-    
+  
     ?animal a ?animalType.
     ?animalType rdfs:subClassOf ex:Animal.
-   
+  
     ?person ex:pet ?animal.
-            
+  
     ex:Manuel_Atencia ex:pet ?animal.
-    
+  
     ?picture a ex:Picture;
              ex:what ?animal.
   }
@@ -179,15 +179,115 @@
   WHERE {
     ?picture a ex:Picture;
              ex:subject ?child.
-    
+  
     ?child ex:birthday ?birthday.
-   
+  
     FILTER (
-      ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)<=18)
+      ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)<18)
     )
   }
   ```
 
 - Toutes les photos avec des adultes uniquement
+  
+  ```sql
+  SELECT DISTINCT ?picture
+  WHERE {
+   ?picture a ex:Picture;
+   ex:subject ?child.
+   ?child ex:birthday ?birthday.
+   FILTER (
+   ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)>=18)
+   )
+  }
+  ```
 
-- 
+- Toutes les photos prises dans une certaine periode de temps
+  
+  ```sql
+  SELECT DISTINCT ?picture ?when
+  WHERE {
+    ?picture a ex:Picture;
+             ex:when ?when.
+    
+    FILTER (?when > "2019-01-01T00:00:00"^^xsd:dateTime)
+    FILTER (?when < "2019-12-31T23:59:59"^^xsd:dateTime)
+  }
+  ```
+
+- Tous les selfies (avec d'autres personnes en plus)
+  
+  ```sql
+  SELECT DISTINCT ?picture ?when
+  WHERE {
+    ?picture a ex:Picture;
+             ex:subject ?subject;
+             ex:creator ?subject;
+  }
+  ```
+
+- Tous les selfies (une seule personne)
+  
+  ```sql
+  SELECT DISTINCT ?picture (count( ?subject) as ?count)
+  WHERE {
+    ?picture a ex:Picture;
+             ex:subject ?subject.
+  }
+  GROUP BY ?picture
+  HAVING (?count = 1)
+  ```
+
+- Toutes les photos avec uniquement des gens venant d'un endroit
+  
+  TODO
+
+- Toutes les photos avec des gens qui sont collègues
+  
+  ```sql
+  SELECT DISTINCT ?picture
+  WHERE {
+     ?picture a ex:Picture;
+              ex:subject ?person;
+              ex:subject ?colleague.
+    
+     ?person <https://example.com/ontology#job> ?personJob.
+     ?colleague <https://example.com/ontology#job> ?colleagueJob.
+    
+     ?personJob ex:colleague ?colleague.
+  }
+  ```
+
+- Toutes les photos prises dans une entreprise
+  
+  ```sql
+  SELECT DISTINCT ?picture
+  WHERE {
+     ?picture a ex:Picture;
+              ex:where ?officeLocation.
+    
+     ?company a ex:Company;
+              ex:officeLocation ?officeLocation.
+  }
+  ```
+
+- Toutes les photos de collègues prises dans leur entreprise
+  
+  ```sql
+  SELECT DISTINCT ?picture
+  WHERE {
+  	?picture a ex:Picture;
+   		ex:subject ?person;
+   		ex:subject ?colleague;
+     		ex:where ?officeLocation.
+  	
+    	?person <https://example.com/ontology#job> ?personJob.
+   	?colleague <https://example.com/ontology#job> ?colleagueJob.
+    	?personJob ex:colleague ?colleague.
+  
+    	?personJob ex:company ?personCompany.
+    	?personCompany ex:officeLocation ?officeLocation.
+  }
+  ```
+
+
