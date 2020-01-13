@@ -9,6 +9,7 @@ import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.SempicModelUniqueException;
 import fr.uga.miashs.sempic.dao.SempicAlbumFacade;
 import fr.uga.miashs.sempic.dao.SempicUserFacade;
+import fr.uga.miashs.sempic.entities.SempicAlbum;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import java.io.Serializable;
 import java.util.logging.Level;
@@ -30,60 +31,36 @@ import javax.validation.constraints.NotBlank;
  */
 @Named
 @ViewScoped
-public class CreateUser implements Serializable {
+public class CreateAlbum implements Serializable {
     
-    private SempicUser current;
+    private SempicAlbum current;
     
     @Inject
-    private SempicUserFacade userDao;
-    
-    
+    private SempicAlbumFacade albumDao;
 
-    
-    public CreateUser() {
+    public CreateAlbum() {
     }
     
     @PostConstruct
     public void init() {
-        current=new SempicUser();
+        current=new SempicAlbum();
     }
 
-
-    public SempicUser getCurrent() {
+    public SempicAlbum getCurrent() {
         return current;
     }
+    
+    public void setTitle(String title){
+       this.current.setTitle(title);
+    }
 
-    public void setCurrent(SempicUser current) {
+    public void setCurrent(SempicAlbum current) {
         this.current = current;
     }
     
-    public String getPassword() {
-        return null;
-    }
-    
-    
-    public void setPassword(@NotBlank(message="Password is required") String password) {
-        getCurrent().setPassword(password);
-    }
-    
-    /*public String generateHash(String s) {
-        return hashAlgo.generate(s.toCharArray());
-    }*/
-    
-    public String create() {
-        //System.out.println(current);
-        
-        try {
-            userDao.create(current);
-        } 
-        catch (SempicModelUniqueException ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("un utilisateur avec cette adresse mail existe déjà"));
-            return "failure";
-        }
-        catch (SempicModelException ex) {
-           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(ex.getMessage()));
-            return "failure";
-        }
+    public String create() throws SempicModelException {
+       
+        albumDao.create(current);       
         
         return "success";
     }
