@@ -32,7 +32,7 @@ import javax.validation.constraints.NotBlank;
 @Named("home")
 @RequestScoped
 public class Home {
-    public String goToAlbum() {
-        return "show-album?faces-redirect=true&idAlbum=" + 6;
+    public String goToAlbum(Long idAlbum) {
+        return "show-album?faces-redirect=true&idAlbum=" + idAlbum;
     }
 }
