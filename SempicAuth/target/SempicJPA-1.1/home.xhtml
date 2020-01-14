@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <f:metadata>
         <f:viewAction  action="home"/>
     </f:metadata>
@@ -11,13 +11,52 @@
         <title>Welcome page</title>
     </h:head>
     <h:body>
+        
+        <style>
+            th {
+                text-align: left;
+            }
+        </style>
+       
         <p>Welcome to sempic application</p>
         
         <p>Avalaible actions:</p>
         <ul>
             <li><h:button outcome="create-user" value="Create a user"/></li>
             <li><h:button outcome="list-users" value="List of users"/></li>
-        </ul>
+            
+            <hr></hr>
+            <h:button outcome="create-album" value="Create an album"/>
+            
+            <br/>
+            <span>Mes albums : </span>
+            <table  style="width:50%">
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Nombre de photos</th>
+                    <th>-</th>
+                    <th>-</th>
+                </tr>
+                <c:forEach var="album" items="#{listAlbums.albums}">
+                    <tr>
+                        <td><h:outputText value="#{album.id}"/></td>
+                        <td><h:outputText value="#{album.title}"/></td>
+                        <td>-1</td>
+                        <td>
+                            <h:form> 
+                                <h:commandButton action="#{home.goToAlbumPage(album.id)}" value="Afficher"/>
+                              </h:form>
+                        </td>
+                        <td>
+                            <h:form> 
+                                <h:commandButton action="#{deleteAlbum.deleteAlbum(album.id)}" value="Supprimer"/>
+                              </h:form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+         </ul>
     </h:body>
 </html>
 
