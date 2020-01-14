@@ -38,9 +38,8 @@ public class DeletePicture {
     }
     
     public String deletePicture(Long idPicture) throws SempicModelException {
-        
-        //TODO: remplacer ça par :     pictureDao.read(idPicture).album.id
-        int idAlbum = 77;
+        int idAlbum = (int)pictureDao.read(idPicture).getId();
+        pictureDao.deleteById(idPicture);
         
         return "show-album?faces-redirect=true&idAlbum=" + idAlbum;
     }

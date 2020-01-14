@@ -6,6 +6,7 @@
 package fr.uga.miashs.sempic.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -29,6 +30,17 @@ public class SempicPicture implements Serializable {
     @NotBlank(message="Un titre doit être donné")
     private String title;
  
+    @ManyToOne()
+    @JoinColumn(name="albumId")
+    private SempicAlbum album;
+
+    public SempicAlbum getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(SempicAlbum album) {
+        this.album = album;
+    }
     
     public SempicPicture() {
     }
@@ -44,8 +56,8 @@ public class SempicPicture implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-
-   
+    
+    
     
     @Override
     public int hashCode() {
