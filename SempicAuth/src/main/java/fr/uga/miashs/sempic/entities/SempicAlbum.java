@@ -27,7 +27,11 @@ public class SempicAlbum implements Serializable {
     @NotBlank(message="Un titre doit être donné")
     //@Column(name="title")
     private String title;
-    
+     
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name="userId")
+    private SempicUser creator;
     
     //idem en one to many pour les photos
     
@@ -59,9 +63,15 @@ public class SempicAlbum implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-
-   
     
+    public SempicUser getCreator() {
+        return creator;
+    }
+    
+    public void setCreator(SempicUser creator) {
+        this.creator = creator;
+    }
+     
     @Override
     public int hashCode() {
         int hash = 5;

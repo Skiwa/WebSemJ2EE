@@ -7,8 +7,11 @@ package fr.uga.miashs.sempic.dao;
 
 import fr.uga.miashs.sempic.SempicModelException;
 import fr.uga.miashs.sempic.entities.SempicAlbum;
+import fr.uga.miashs.sempic.entities.SempicUser;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
@@ -17,7 +20,9 @@ import javax.ejb.Stateless;
 
 @Stateless
 public class SempicAlbumFacade extends AbstractJpaFacade<Long,SempicAlbum> {
-
+    
+    @Inject
+    private SempicUserFacade userDao;
     
     public SempicAlbumFacade() {
         super(SempicAlbum.class);
@@ -32,5 +37,12 @@ public class SempicAlbumFacade extends AbstractJpaFacade<Long,SempicAlbum> {
     public List<SempicAlbum> findAll() {
         return getEntityManager().createQuery(this.findAllQuery())
             .getResultList();
+    }
+    
+    public List<SempicAlbum> findAlbumsForUser(Long id){
+        SempicUser user = userDao.read(id);
+        List<SempicAlbum> albumsList = new ArrayList<>(user.getAlbums());
+        
+        return albumsList;
     }
 }
