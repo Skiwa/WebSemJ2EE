@@ -6,6 +6,7 @@
 package fr.uga.miashs.sempic.entities;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -15,9 +16,6 @@ import javax.validation.constraints.*;
  */
 
 @Entity
-/*@Table(name="SempicAlbums", uniqueConstraints = {
-    @UniqueConstraint(name="DistinctTitleForUser", columnNames = {"title","owner_id"})
-})*/
 public class SempicAlbum implements Serializable {
     
     @Id
@@ -25,26 +23,20 @@ public class SempicAlbum implements Serializable {
     private long id;
     
     @NotBlank(message="Un titre doit être donné")
-    //@Column(name="title")
     private String title;
     
     
-    //idem en one to many pour les photos
-    
-   /* @ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name="creatorId")
-    @Column(name="photos")
-    private SempicUser creator;
+   @OneToMany(fetch = FetchType.EAGER, mappedBy = "album",cascade = CascadeType.REMOVE)
+   private Set<SempicPicture> pictures;
 
-    public SempicUser getCreator() {
-        return creator;
+    public Set<SempicPicture> getPictures() {
+        return pictures;
     }
 
-    public void setCreator(SempicUser creator) {
-        this.creator = creator;
-    }*/
-
-    
+    public void setPictures(Set<SempicPicture> pictures) {
+        this.pictures = pictures;
+    }
+        
     public SempicAlbum() {
     }
     
@@ -91,6 +83,8 @@ public class SempicAlbum implements Serializable {
     @Override
     public String toString() {
         return "SempicAlbum{id="+ id + ", "
-                + "title=" + title +'}';
+                + "title=" + title +","
+                + "pictures=" + pictures + "}";
     }
 }
+
