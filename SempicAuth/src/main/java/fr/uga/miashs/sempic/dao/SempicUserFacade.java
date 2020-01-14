@@ -6,7 +6,9 @@
 package fr.uga.miashs.sempic.dao;
 
 import fr.uga.miashs.sempic.SempicModelException;
+import fr.uga.miashs.sempic.entities.SempicAlbum;
 import fr.uga.miashs.sempic.entities.SempicUser;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
@@ -39,6 +41,13 @@ public class SempicUserFacade extends AbstractJpaFacade<Long,SempicUser> {
         return super.create(user);
     }
     
+    public SempicUser read(Long id) {
+        Query q = getEntityManager().createNamedQuery("query.SempicUser.read");
+        q.setParameter("id", id);
+        SempicUser u =  (SempicUser) q.getSingleResult();
+        return u;
+    }
+    
     @Override
     public List<SempicUser> findAll() {
         EntityGraph entityGraph = this.getEntityManager().getEntityGraph("graph.SempicUser.groups-memberOf");
@@ -46,7 +55,6 @@ public class SempicUserFacade extends AbstractJpaFacade<Long,SempicUser> {
             .setHint("javax.persistence.fetchgraph", entityGraph)
             .getResultList();
     }
-    
     
     
     public SempicUser login(String email, String password) throws SempicModelException {

@@ -49,16 +49,6 @@
     </navigation-rule>
     
     <navigation-rule>
-        <description>Logout page</description>
-        <from-view-id>*</from-view-id>
-        <navigation-case>
-            <from-outcome>logout</from-outcome>
-            <to-view-id>/goodbye.xhtml</to-view-id>
-            <redirect/>
-        </navigation-case>
-    </navigation-rule>
-    
-    <navigation-rule>
         <description>User creation action result</description>
         <from-view-id>*</from-view-id>
         <navigation-case>
@@ -116,6 +106,17 @@
         </navigation-case>
     </navigation-rule>
     
+    <navigation-rule>
+        <description>Logout</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{sessionTools.logout}</from-action>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+
      <navigation-rule>
         <description>Delete user</description>
         <from-view-id>*</from-view-id>
@@ -125,4 +126,5 @@
             <redirect/>  
         </navigation-case>
     </navigation-rule>
+
 </faces-config>
