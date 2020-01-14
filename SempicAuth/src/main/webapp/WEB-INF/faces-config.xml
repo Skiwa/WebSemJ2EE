@@ -106,4 +106,15 @@
             </navigation-case>
         </navigation-rule>
     
+    
+     <navigation-rule>
+        <description>Show album</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>show-album</from-outcome>
+            <to-view-id>/show-album.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>

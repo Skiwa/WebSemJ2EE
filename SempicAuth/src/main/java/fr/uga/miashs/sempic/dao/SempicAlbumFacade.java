@@ -33,4 +33,8 @@ public class SempicAlbumFacade extends AbstractJpaFacade<Long,SempicAlbum> {
         return getEntityManager().createQuery(this.findAllQuery())
             .getResultList();
     }
+    
+    public SempicAlbum findById(int idAlbum){
+        return super.read((long)idAlbum);
+    }
 }

@@ -3,35 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.uga.miashs.sempic.entities;
+/*package fr.uga.miashs.sempic.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-/**
- *
- * @author Jerome David <jerome.david@univ-grenoble-alpes.fr>
- */
+
+
+@NamedQueries({
+    @NamedQuery(
+            name="findAllPicturesByAlbum",
+            query="SELECT picture FROM SempicPicture WHERE picture.album=:album"
+    )
+})
+
 
 @Entity
-/*@Table(name="SempicAlbums", uniqueConstraints = {
-    @UniqueConstraint(name="DistinctTitleForUser", columnNames = {"title","owner_id"})
-})*/
-public class SempicAlbum implements Serializable {
+@Table(name="SempicPicture")
+public class SempicPicture implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     
     @NotBlank(message="Un titre doit être donné")
-    //@Column(name="title")
+    @Column(name="title")
     private String title;
     
     
-    //idem en one to many pour les photos
+//many to one album
     
-   /* @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name="creatorId")
     @Column(name="photos")
     private SempicUser creator;
@@ -42,10 +45,10 @@ public class SempicAlbum implements Serializable {
 
     public void setCreator(SempicUser creator) {
         this.creator = creator;
-    }*/
+    }
 
     
-    public SempicAlbum() {
+    public SempicPicture() {
     }
     
     public long getId() {
@@ -80,7 +83,7 @@ public class SempicAlbum implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final SempicAlbum other = (SempicAlbum) obj;
+        final SempicPicture other = (SempicPicture) obj;
         if (this.id != other.id) {
             return false;
         }
@@ -94,3 +97,4 @@ public class SempicAlbum implements Serializable {
                 + "title=" + title +'}';
     }
 }
+*/
