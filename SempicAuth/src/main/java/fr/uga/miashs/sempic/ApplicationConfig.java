@@ -9,6 +9,7 @@ import fr.uga.miashs.sempic.entities.SempicGroup;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import fr.uga.miashs.sempic.entities.SempicUserType;
 import fr.uga.miashs.sempic.dao.GroupFacade;
+import fr.uga.miashs.sempic.dao.SempicAlbumFacade;
 import fr.uga.miashs.sempic.dao.SempicUserFacade;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,7 +97,6 @@ public class ApplicationConfig {
         } catch (SempicModelException e) {
             Logger.getLogger(ApplicationConfig.class.getName()).log(Level.WARNING, "Admin already exists");
         }
-
     }
 
 }

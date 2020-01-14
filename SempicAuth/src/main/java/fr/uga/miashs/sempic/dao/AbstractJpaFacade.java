@@ -125,7 +125,7 @@ public abstract class AbstractJpaFacade<K, T> {
     public List<T> findAll() {
         return find(findAllQuery());
     }
-
+  
     public List<T> find(CriteriaQuery query) {
         List<T> res = getEntityManager().createQuery(query).getResultList();
         return res;

@@ -8,6 +8,7 @@ package fr.uga.miashs.sempic.backingbeans;
 import fr.uga.miashs.sempic.SempicException;
 import fr.uga.miashs.sempic.dao.GroupFacade;
 import fr.uga.miashs.sempic.SempicModelException;
+import fr.uga.miashs.sempic.dao.SempicAlbumFacade;
 import fr.uga.miashs.sempic.dao.SempicUserFacade;
 import fr.uga.miashs.sempic.entities.SempicGroup;
 import fr.uga.miashs.sempic.entities.SempicUser;
