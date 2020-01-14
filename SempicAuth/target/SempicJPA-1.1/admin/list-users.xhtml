@@ -49,12 +49,19 @@
                     <f:param name="userId" value="#{user.id}"/>
                 </h:button>
             </h:column>
+            <h:column>
+                <h:form>
+                <h:commandButton value="Delete" action="#{deleteUser.delete(user)}">
+                    <f:param name="userId" value="#{user.id}"/>
+                </h:commandButton>
+                </h:form>
+            </h:column>
 
 
         </h:dataTable>
 
         <h:link value="Add a new user link"  outcome="create-user"/>
-
+        
 
     </h:body>
 </html>
