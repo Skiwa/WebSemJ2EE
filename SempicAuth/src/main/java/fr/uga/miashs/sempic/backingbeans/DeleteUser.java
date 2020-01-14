@@ -43,11 +43,16 @@ public class DeleteUser implements Serializable {
     public DeleteUser() {
     }
     
-    public String delete(SempicUser user ) {
-        //System.out.println(current);
-        
+    public String delete(SempicUser user, SempicUser currentUser ) {
+        System.out.println(currentUser);
         try {
+            if(currentUser.getId() != user.getId()){
             userDao.delete(user);
+            System.out.println("User = pas moi ");
+            }else{
+                System.out.println("User = moi bg");
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vous ne pouvez pas vous supprimer"));
+            }
         } 
         catch (SempicModelUniqueException ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("un utilisateur avec cette adresse mail existe déjà"));
