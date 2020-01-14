@@ -3,20 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*package fr.uga.miashs.sempic.entities;
+package fr.uga.miashs.sempic.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
 
-
-@NamedQueries({
+/*@NamedQueries({
     @NamedQuery(
             name="findAllPicturesByAlbum",
             query="SELECT picture FROM SempicPicture WHERE picture.album=:album"
     )
-})
+})*/
 
 
 @Entity
@@ -28,25 +27,8 @@ public class SempicPicture implements Serializable {
     private long id;
     
     @NotBlank(message="Un titre doit être donné")
-    @Column(name="title")
     private String title;
-    
-    
-//many to one album
-    
-    @ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name="creatorId")
-    @Column(name="photos")
-    private SempicUser creator;
-
-    public SempicUser getCreator() {
-        return creator;
-    }
-
-    public void setCreator(SempicUser creator) {
-        this.creator = creator;
-    }
-
+ 
     
     public SempicPicture() {
     }
@@ -93,8 +75,7 @@ public class SempicPicture implements Serializable {
  
     @Override
     public String toString() {
-        return "SempicAlbum{id="+ id + ", "
+        return "SempicPicture{id="+ id + ", "
                 + "title=" + title +'}';
     }
 }
-*/
