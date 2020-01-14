@@ -19,10 +19,9 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.security.enterprise.SecurityContext;
@@ -33,7 +32,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Jerome David <jerome.david@univ-grenoble-alpes.fr>
  */
-@Named
+@Named("sessionTools")
 @SessionScoped
 public class SessionTools implements Serializable {
  
@@ -87,10 +86,8 @@ public class SessionTools implements Serializable {
                 }
             };
         }
-        catch (NoResultException e) {
+        catch (NoResultException | SempicModelException e) {
             //e.printStackTrace();
-            return null;
-        } catch (SempicModelException ex) {
             return null;
         }
     }
@@ -123,10 +120,11 @@ public class SessionTools implements Serializable {
     
     /**
      * get the user that correspond to a specific userId in the request
-     * parameter only admin can request another user than himself. in other
+     * parameter only admin can request another user than himself.in other 
      * cases, it returns the connected user.
      *
      * @return
+     * @throws fr.uga.miashs.sempic.SempicException
      */
     @Produces
     @Selected
@@ -195,7 +193,10 @@ public class SessionTools implements Serializable {
      }
     
     public String logout() {
-        ((HttpSession)facesContext.getExternalContext().getSession(false)).invalidate();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext ec = facesContext.getExternalContext();
+        final HttpServletRequest request = (HttpServletRequest) ec.getRequest();
+        request.getSession(false).invalidate();
         return "logout";
     }
 }

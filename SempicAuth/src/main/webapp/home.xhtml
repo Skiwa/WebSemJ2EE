@@ -24,7 +24,9 @@
         <ul>
             <li><h:button outcome="create-user" value="Create a user"/></li>
             <li><h:button outcome="list-users" value="List of users"/></li>
-            
+            <h:form>
+                <h:commandButton action="#{sessionTools.logout}" value="Logout"/>
+            </h:form>
             <hr></hr>
             <h:button outcome="create-album" value="Create an album"/>
             
@@ -38,7 +40,7 @@
                     <th>-</th>
                     <th>-</th>
                 </tr>
-                <c:forEach var="album" items="#{listAlbums.albums}">
+                <c:forEach var="album" items="#{listAlbums.getAlbumsUser(sessionTools.connectedUser)}">
                     <tr>
                         <td><h:outputText value="#{album.id}"/></td>
                         <td><h:outputText value="#{album.title}"/></td>
@@ -46,7 +48,7 @@
                         <td>
                             <h:form> 
                                 <h:commandButton action="#{home.goToAlbumPage(album.id)}" value="Afficher"/>
-                              </h:form>
+                            </h:form>
                         </td>
                         <td>
                             <h:form> 

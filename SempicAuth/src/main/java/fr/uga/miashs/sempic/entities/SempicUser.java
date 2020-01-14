@@ -26,8 +26,12 @@ import javax.validation.constraints.*;
         query = "SELECT DISTINCT u FROM SempicUser u LEFT JOIN FETCH u.groups LEFT JOIN FETCH u.memberOf"
 ),
 @NamedQuery(
+    name = "query.SempicUser.read", 
+    query = "SELECT DISTINCT u FROM SempicUser u WHERE u.id=:id"
+),
+@NamedQuery(
         name = "query.SempicUser.readByEmail",
-        query = "SELECT DISTINCT u FROM SempicUser u WHERE u.email=:email "
+        query = "SELECT DISTINCT u FROM SempicUser u WHERE u.email=:email"
 ),
 @NamedQuery(
         name = "query.SempicUser.login",
@@ -39,8 +43,7 @@ import javax.validation.constraints.*;
   attributeNodes = {
     @NamedAttributeNode("groups"),
     @NamedAttributeNode("memberOf"),
-  }
-)
+  })
 @Entity
 public class SempicUser implements Serializable {
     public final static String PREFIX="/users/";
@@ -50,10 +53,10 @@ public class SempicUser implements Serializable {
     private long id;
     
     @NotBlank(message="Un nom de famille doit être donné")
-    private String lastname;
+    private String lastName;
     
     @NotBlank(message="Un prénom doit être donné")
-    private String firstname;
+    private String firstName;
     
     @Email
     @NotBlank(message="Une adresse mail doit être donnée")
@@ -67,6 +70,9 @@ public class SempicUser implements Serializable {
     
     @OneToMany(mappedBy = "owner",cascade = CascadeType.REMOVE)
     private Set<SempicGroup> groups;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "creator",cascade = CascadeType.REMOVE)
+    private Set<SempicAlbum> albums;
 
     @ManyToMany(mappedBy = "members" )//,cascade = CascadeType.REMOVE)//, fetch=FetchType.EAGER
     private Set<SempicGroup> memberOf;
@@ -85,19 +91,19 @@ public class SempicUser implements Serializable {
     }
     
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastName = lastname;
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
     }
 
     public String getEmail() {
@@ -127,6 +133,11 @@ public class SempicUser implements Serializable {
     public Set<SempicGroup> getGroups() {
         if (groups==null) return Collections.emptySet();
         return Collections.unmodifiableSet(groups);
+    }
+    
+    public Set<SempicAlbum> getAlbums() {
+        if (albums==null) return Collections.emptySet();
+        return Collections.unmodifiableSet(albums);
     }
 
     public Set<SempicGroup> getMemberOf() {
@@ -171,6 +182,6 @@ public class SempicUser implements Serializable {
     @Override
     public String toString() {
         return "SempicUser{id="+ id + ", "
-                + "lastname=" + lastname + ", firstname=" + firstname + ", email=" + email + '}';
+                + "lastname=" + lastName + ", firstname=" + firstName + ", email=" + email + '}';
     }
 }
