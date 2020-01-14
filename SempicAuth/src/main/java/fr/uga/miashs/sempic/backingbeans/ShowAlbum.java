@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Jerome David <jerome.david@univ-grenoble-alpes.fr>
  */
-@Named
+@Named("showAlbum")
 @RequestScoped
 public class ShowAlbum {
 
@@ -38,12 +38,10 @@ public class ShowAlbum {
    public ShowAlbum() {
     }
     
-    public SempicAlbum getAlbum() {
-        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        int idAlbum = Integer.parseInt(request.getParameter("idAlbum"));
+    public SempicAlbum getAlbumById(Long idAlbum) {
         
         if (album == null) {
-            album = albumDao.findById(idAlbum);
+            album = albumDao.read(idAlbum);
         }
         return album;
     }

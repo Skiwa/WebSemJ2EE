@@ -44,12 +44,15 @@
                         <td><h:outputText value="#{album.title}"/></td>
                         <td>-1</td>
                         <td>
-                            <!--<h:button outcome="show-album" value="Afficher"><f:param name="idAlbum" value="6"/></h;button>-->
                             <h:form> 
-                                <h:commandButton action="#{home.goToAlbum(album.id)}" value="Go"/>
+                                <h:commandButton action="#{home.goToAlbumPage(album.id)}" value="Afficher"/>
                               </h:form>
                         </td>
-                        <td><h:button value="Supprimer"/></td>
+                        <td>
+                            <h:form> 
+                                <h:commandButton action="#{deleteAlbum.deleteAlbum(album.id)}" value="Supprimer"/>
+                              </h:form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
