@@ -106,22 +106,24 @@
             </navigation-case>
         </navigation-rule>
     
-
+     <navigation-rule>
+        <description>Show album</description>
+        <from-view-id>list-user.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>show-album</from-outcome>
+            <to-view-id>/show-album.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+    </navigation-rule>
     
-    <navigation-rule>
-            <description>Picture creation action result</description>
-            <from-view-id>create-picture.xhtml</from-view-id>
-            <navigation-case>
-                <from-action>#{createPicture.create()}</from-action>
-                <from-outcome>success</from-outcome>
-                <to-view-id>/home.xhtml</to-view-id>
-                <redirect/>
-            </navigation-case>
-            <navigation-case>
-                <from-action>#{createPicture.create()}</from-action>
-                <from-outcome>failure</from-outcome>
-                <to-view-id>#{view.viewId}</to-view-id>
-            </navigation-case>
-        </navigation-rule>
+     <navigation-rule>
+        <description>Delete user</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>#{deleteUser.delete(user)}</from-action>
+            <to-view-id>admin/list-users.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+    </navigation-rule>
     
 </faces-config>
