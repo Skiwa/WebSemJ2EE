@@ -10,9 +10,11 @@ import fr.uga.miashs.sempic.SempicModelUniqueException;
 import fr.uga.miashs.sempic.dao.SempicAlbumFacade;
 import fr.uga.miashs.sempic.dao.SempicPictureFacade;
 import fr.uga.miashs.sempic.dao.SempicUserFacade;
+import fr.uga.miashs.sempic.entities.SempicAlbum;
 import fr.uga.miashs.sempic.entities.SempicPicture;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -38,6 +40,8 @@ public class CreatePicture implements Serializable {
     
     @Inject
     private SempicPictureFacade pictureDao;
+    @Inject
+    private SempicAlbumFacade albumDao;
 
     public CreatePicture() {
     }
@@ -60,12 +64,17 @@ public class CreatePicture implements Serializable {
     }
     
     public String create() throws SempicModelException {
-       
-        pictureDao.create(current);       
         
-        //TODO : remplacer ça par photo.album.id
-        int idAlbum = 77;
+        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String idAlbum = params.get("idAlbum");
+        
+        SempicAlbum album = albumDao.read(Long.parseLong(idAlbum));
+       
+       current.setAlbum(album);
+       
+       pictureDao.create(current);
         
         return "show-album?faces-redirect=true&idAlbum=" + idAlbum;
+
     }
 }
