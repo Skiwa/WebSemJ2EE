@@ -13,6 +13,7 @@ import fr.uga.miashs.sempic.entities.SempicAlbum;
 import fr.uga.miashs.sempic.entities.SempicPicture;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -32,10 +33,14 @@ public class ListPictures {
 
     @Inject
     private SempicPictureFacade pictureDao;
-
+    @Inject
+    private SempicAlbumFacade albumDao;
     
     public List<SempicPicture> getPictures() {
         return pictureDao.findAll();
+    }
+    public Set<SempicPicture> getPicturesByAlbumId(Long idAlbum) {
+        return albumDao.read(idAlbum).getPictures();
     }
     
 }
