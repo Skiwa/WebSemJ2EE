@@ -63,6 +63,9 @@ public class CreatePicture implements Serializable {
        
         pictureDao.create(current);       
         
-        return "success";
+        //TODO : remplacer ça par photo.album.id
+        int idAlbum = 77;
+        
+        return "show-album?faces-redirect=true&idAlbum=" + idAlbum;
     }
 }
