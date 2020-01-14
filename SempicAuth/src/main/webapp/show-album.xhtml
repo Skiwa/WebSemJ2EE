@@ -22,7 +22,7 @@ and open the template in the editor.
                     <th>Titre de la photo</th>
                     <th>-</th>
                 </tr>
-                <c:forEach var="picture" items="#{listPictures.pictures}">
+            <c:forEach var="picture" items="#{listPictures.getPicturesByAlbumId(param.idAlbum)}">
                         <tr>
                             <td><h:outputText value="#{picture.id}"/></td>
                             <td><h:outputText value="#{picture.title}"/></td>

@@ -6,9 +6,11 @@
 package fr.uga.miashs.sempic.dao;
 
 import fr.uga.miashs.sempic.SempicModelException;
+import fr.uga.miashs.sempic.entities.SempicAlbum;
 import fr.uga.miashs.sempic.entities.SempicPicture;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 
 /**
  *
@@ -33,4 +35,4 @@ public class SempicPictureFacade extends AbstractJpaFacade<Long,SempicPicture> {
         return getEntityManager().createQuery(this.findAllQuery())
             .getResultList();
     }
-}
+ }

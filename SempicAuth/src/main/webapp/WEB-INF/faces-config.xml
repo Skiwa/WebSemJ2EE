@@ -106,7 +106,6 @@
         </navigation-case>
     </navigation-rule>
     
-
     <navigation-rule>
         <description>Logout</description>
         <from-view-id>*</from-view-id>
@@ -117,7 +116,6 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
-    
 
      <navigation-rule>
         <description>Delete user</description>

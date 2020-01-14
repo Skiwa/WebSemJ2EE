@@ -40,7 +40,8 @@ public class SempicAlbum implements Serializable {
     public void setPictures(Set<SempicPicture> pictures) {
         this.pictures = pictures;
     }
-        
+
+
     public SempicAlbum() {
     }
     
