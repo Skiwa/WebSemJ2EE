@@ -22,6 +22,7 @@
 /Users/skiwa/Desktop/WebSemJ2EE/SempicAuth/src/main/java/fr/uga/miashs/sempic/SempicException.java
 /Users/skiwa/Desktop/WebSemJ2EE/SempicAuth/src/main/java/fr/uga/miashs/sempic/dao/UserTypeConverter.java
 /Users/skiwa/Desktop/WebSemJ2EE/SempicAuth/src/main/java/fr/uga/miashs/sempic/entities/SempicAlbum.java
+/Users/skiwa/Desktop/WebSemJ2EE/SempicAuth/src/main/java/fr/uga/miashs/sempic/backingbeans/DeleteUser.java
 /Users/skiwa/Desktop/WebSemJ2EE/SempicAuth/src/main/java/fr/uga/miashs/sempic/entities/SempicUser.java
 /Users/skiwa/Desktop/WebSemJ2EE/SempicAuth/src/main/java/fr/uga/miashs/sempic/dao/SempicPictureFacade.java
 /Users/skiwa/Desktop/WebSemJ2EE/SempicAuth/src/main/java/fr/uga/miashs/sempic/entities/SempicGroup.java

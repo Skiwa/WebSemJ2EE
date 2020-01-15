@@ -31,9 +31,13 @@ and open the template in the editor.
                             </td>
                             <td><h:outputText value="#{picture.title}"/></td>
                             <td>
-                                  <h:form> 
-                                    <h:commandButton action="#{deletePicture.deletePicture(picture.id)}" value="Supprimer"/>
+                                <h:form> 
+                                    <h:commandButton action="#{deletePicture.deletePicture()}" value="Supprimer">
+                                            <f:param name="idPicture" value="#{picture.id}" /> 
+                                            <f:param name="idAlbum" value="#{param.idAlbum}" />
+                                    </h:commandButton>
                                   </h:form>
+                                
                             </td>
                         </tr>
                     </c:forEach>

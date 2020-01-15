@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>Create an album</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,7 +18,11 @@ and open the template in the editor.
                 <h:inputText id="title" value="#{createAlbum.current.title}"/>
                 <h:message for="title"/>
                 
-                <h:commandButton value="Créer" action="#{createAlbum.create()}"/>
+                <h:commandButton value="Créer" action="#{createAlbum.create()}">
+                    <f:param name="idUser" value="#{sessionTools.connectedUser.id}"/>
+                </h:commandButton>
+                
+                <h:outputText value="ici : #{sessionTools.connectedUser.id}"/>
         </h:form>
     </body>
 </html>

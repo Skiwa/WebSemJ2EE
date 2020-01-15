@@ -6,11 +6,44 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-
+        <h1>Affichage de l'album : <h:outputText value="#{showAlbum.getAlbumById(param.idAlbum)}"/> de <h:outputText value="#{sessionTools.connectedUser.firstname}"/></h1>
+        <hr/>
+        <table  style="width:50%">
+                <tr>
+                    <th>#</th>
+                    <th>Titre de la photo</th>
+                    <th>-</th>
+                </tr>
+            <c:forEach var="picture" items="#{listPictures.getPicturesByAlbumId(param.idAlbum)}">
+                        <tr>
+                            <td><h:outputText value="#{picture.id}"/></td>
+                            <td>
+                                <img src="http://localhost:8080/SempicJPA/#{picture.image.getName()}" alt="Smiley face" height="42" width="42"/>
+                            
+                            </td>
+                            <td><h:outputText value="#{picture.title}"/></td>
+                            <td>
+                                <h:form> 
+                                    <h:commandButton action="#{deletePicture.deletePicture()}" value="Supprimer">
+                                            <f:param name="idPicture" value="#{picture.id}" /> 
+                                            <f:param name="idAlbum" value="#{param.idAlbum}" />
+                                    </h:commandButton>
+                                  </h:form>
+                                
+                            </td>
+                        </tr>
+                    </c:forEach>
+            </table>
+        
+        
+        <h:button outcome="create-picture" value="Ajouter une photo"><f:param name="idAlbum" value="#{param.idAlbum}"/></h:button>
     </body>
 </html>

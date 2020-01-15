@@ -12,6 +12,7 @@ import fr.uga.miashs.sempic.dao.SempicUserFacade;
 import fr.uga.miashs.sempic.entities.SempicAlbum;
 import fr.uga.miashs.sempic.entities.SempicUser;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -37,10 +38,14 @@ public class DeletePicture {
    public DeletePicture() {
     }
     
-    public String deletePicture(Long idPicture) throws SempicModelException {
-        int idAlbum = (int)pictureDao.read(idPicture).getAlbum().getId();
-        pictureDao.deleteById(idPicture);
+    public String deletePicture() throws SempicModelException {
+
+        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String idAlbum = params.get("idAlbum"); 
+        String idPicture = params.get("idPicture");        
+
+        pictureDao.deleteById(Long.parseLong(idPicture));
         
-        return "show-album?faces-redirect=true&idAlbum=" + idAlbum;
+         return "show-album?faces-redirect=true&idAlbum="+idAlbum;
     }
 }
