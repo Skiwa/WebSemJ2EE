@@ -35,7 +35,6 @@ public class testRDF {
      
      public String getCoucou(){
         
-         ExampleRDFStore toast = new ExampleRDFStore();
          return coucou;
      }
     
