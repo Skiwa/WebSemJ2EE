@@ -25,6 +25,10 @@ and open the template in the editor.
             <c:forEach var="picture" items="#{listPictures.getPicturesByAlbumId(param.idAlbum)}">
                         <tr>
                             <td><h:outputText value="#{picture.id}"/></td>
+                            <td>
+                                <img src="http://localhost:8080/SempicJPA/#{picture.image.getName()}" alt="Smiley face" height="42" width="42"/>
+                            
+                            </td>
                             <td><h:outputText value="#{picture.title}"/></td>
                             <td>
                                   <h:form> 
