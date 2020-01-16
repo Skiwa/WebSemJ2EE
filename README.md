@@ -209,7 +209,7 @@
   WHERE {
     ?picture a ex:Picture;
              ex:when ?when.
-    
+  
     FILTER (?when > "2019-01-01T00:00:00"^^xsd:dateTime)
     FILTER (?when < "2019-12-31T23:59:59"^^xsd:dateTime)
   }
@@ -250,10 +250,10 @@
      ?picture a ex:Picture;
               ex:subject ?person;
               ex:subject ?colleague.
-    
+  
      ?person <https://example.com/ontology#job> ?personJob.
      ?colleague <https://example.com/ontology#job> ?colleagueJob.
-    
+  
      ?personJob ex:colleague ?colleague.
   }
   ```
@@ -265,7 +265,7 @@
   WHERE {
      ?picture a ex:Picture;
               ex:where ?officeLocation.
-    
+  
      ?company a ex:Company;
               ex:officeLocation ?officeLocation.
   }
@@ -276,17 +276,86 @@
   ```sql
   SELECT DISTINCT ?picture
   WHERE {
-  	?picture a ex:Picture;
-   		ex:subject ?person;
-   		ex:subject ?colleague;
-     		ex:where ?officeLocation.
-  	
-    	?person <https://example.com/ontology#job> ?personJob.
-   	?colleague <https://example.com/ontology#job> ?colleagueJob.
-    	?personJob ex:colleague ?colleague.
+      ?picture a ex:Picture;
+           ex:subject ?person;
+           ex:subject ?colleague;
+             ex:where ?officeLocation.
   
-    	?personJob ex:company ?personCompany.
-    	?personCompany ex:officeLocation ?officeLocation.
+        ?person <https://example.com/ontology#job> ?personJob.
+       ?colleague <https://example.com/ontology#job> ?colleagueJob.
+        ?personJob ex:colleague ?colleague.
+  
+        ?personJob ex:company ?personCompany.
+        ?personCompany ex:officeLocation ?officeLocation.
+  }
+  ```
+
+- Toutes les photos prises dans un pays
+  
+  ```sql
+  SELECT DISTINCT ?picture ?place ?region ?country
+  WHERE {
+    ?picture ex:where ?place.
+    
+    ?place a ?placeType.
+    {?placeType rdfs:subClassOf ex:Place}UNION{?place a ex:Place}
+    
+    {
+      #The place is located in a city
+      ?place ex:city ?city.
+      ?city ex:region ?region.
+    	?region ex:country ?country.
+    }UNION{
+      #The place is located in a region (ex: city or geographical zone)
+    	?place ex:region ?region.
+      ?region ex:country ?country.
+    }UNION{
+      #The place is a region
+    	?place ex:country ?country
+    }
+    
+    FILTER (?country = ex:France)
+  }
+  ```
+
+- Toutes les photos prises dans un pays où on parle une certaine langue
+  
+  ```sql
+  SELECT DISTINCT ?picture
+  WHERE {
+  	picture a ex:Picture;
+  	    ex:where ?place.
+  	
+  	?place a ?placeType.
+    	{?placeType rdfs:subClassOf ex:Place}UNION{?place a ex:Place}
+  
+  	{
+   		#The place is located in a city
+  		?place ex:city ?city.
+  		?city ex:region ?region.
+  		?region ex:country ?country.
+  	}UNION{
+  		#The place is located in a region (ex: city or geographical zone)
+      	?place ex:region ?region.
+      	?region ex:country ?country.
+  	}UNION{
+      	#The place is a region
+      	?place ex:country ?country
+  	}
+    
+    	?country ex:placeName ?countryName.
+    
+      SERVICE <http://dbpedia.org/sparql> {
+       #Retrieve the country
+       ?dbCountry a <http://schema.org/Country>.
+       ?dbCountry rdfs:label ?dbCountryName.
+       FILTER(?dbCountryName = ?countryName).
+       
+       #Retrieve the language
+       ?dbCountry dbo:language ?dbLanguage.
+       ?dbLanguage rdfs:label ?dbLanguageLabel.
+       FILTER(STR(?dbLanguageLabel) = "Français")
+     }
   }
   ```
 
