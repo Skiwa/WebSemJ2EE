@@ -297,25 +297,7 @@
 
     
 
-<!-- https://example.com/ontology#albumId -->
 
-    <owl:DatatypeProperty rdf:about="https://example.com/ontology#albumId">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label>in album</rdfs:label>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- https://example.com/ontology#ownerId -->
-
-    <owl:DatatypeProperty rdf:about="https://example.com/ontology#ownerId">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label>has owner</rdfs:label>
-    </owl:DatatypeProperty>
-    
-    
     <!-- https://example.com/ontology#FN -->
 
     <owl:DatatypeProperty rdf:about="https://example.com/ontology#FN">
@@ -784,7 +766,7 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Auvergne_Rhone_Alpes">
         <rdf:type rdf:resource="https://example.com/ontology#Region"/>
         <country rdf:resource="https://example.com/ontology#France"/>
-        <placeName xml:lang="en">Auvergne-Rhône-Alpes</placeName>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Auvergne-Rhône-Alpes</placeName>
     </owl:NamedIndividual>
     
 
@@ -813,7 +795,7 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Catalonia">
         <rdf:type rdf:resource="https://example.com/ontology#Region"/>
         <country rdf:resource="https://example.com/ontology#Spain"/>
-        <placeName xml:lang="en">Catalonia</placeName>
+        <placeName xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Catalonia</placeName>
     </owl:NamedIndividual>
     
 
@@ -903,7 +885,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#France">
         <rdf:type rdf:resource="https://example.com/ontology#Country"/>
-        <placeName xml:lang="en">France</placeName>
+        <placeName xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">France</placeName>
     </owl:NamedIndividual>
     
 
@@ -1255,7 +1237,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Spain">
         <rdf:type rdf:resource="https://example.com/ontology#Country"/>
-        <placeName xml:lang="en">Spain</placeName>
+        <placeName xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Spain</placeName>
     </owl:NamedIndividual>
     
 
