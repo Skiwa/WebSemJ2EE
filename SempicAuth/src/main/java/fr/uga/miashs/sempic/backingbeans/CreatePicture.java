@@ -13,6 +13,8 @@ import fr.uga.miashs.sempic.dao.SempicUserFacade;
 import fr.uga.miashs.sempic.entities.SempicAlbum;
 import fr.uga.miashs.sempic.entities.SempicPicture;
 import fr.uga.miashs.sempic.entities.SempicUser;
+import fr.uga.miashs.sempic.model.rdf.SempicOnto;
+import fr.uga.miashs.sempic.rdf.BasicSempicRDFStore;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -33,6 +35,10 @@ import javax.inject.Named;
 import javax.security.enterprise.identitystore.Pbkdf2PasswordHash;
 import javax.servlet.http.Part;
 import javax.validation.constraints.NotBlank;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.vocabulary.RDFS;
 
 /**
  *
@@ -119,6 +125,8 @@ public class CreatePicture implements Serializable {
         }catch(Exception e){
             e.printStackTrace(System.out);
         }
+       
+        
        current.setAlbum(album);
        System.out.println("CON DE T MORT: "+myPicture);
        current.setImage(myPicture);

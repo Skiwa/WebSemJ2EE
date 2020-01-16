@@ -25,6 +25,7 @@ fr/uga/miashs/sempic/backingbeans/CreateGroup.class
 fr/uga/miashs/sempic/dao/SempicUserFacade.class
 fr/uga/miashs/sempic/backingbeans/SessionTools$1.class
 fr/uga/miashs/sempic/dao/UserTypeConverter.class
+fr/uga/miashs/sempic/backingbeans/testRDF.class
 fr/uga/miashs/sempic/backingbeans/CreateUser.class
 fr/uga/miashs/sempic/backingbeans/ShowAlbum.class
 fr/uga/miashs/sempic/entities/SempicGroup.class

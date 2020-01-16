@@ -18,23 +18,47 @@ import org.apache.jena.vocabulary.RDFS;
  */
 public class ExampleRDFStore {
     public static void main(String[] args) {
+        
         BasicSempicRDFStore s = new BasicSempicRDFStore();
-
-        Resource pRes = s.createPhoto(1, 1, 1);
-
-        
-        
         Model m = ModelFactory.createDefaultModel();
-        
-        
-        
-        
-        Resource newAnimal = m.createResource(SempicOnto.Dog);
-        newAnimal.addLiteral(RDFS.label, "Medor");
-        m.add(pRes, SempicOnto.depicts, newAnimal);
-        m.write(System.out, "turtle");
 
+        
+        //Crée une photo
+        //(id picture, id album, id owner)
+        Resource pRes = s.createPicture(1, 1, 1);          
+        
+        //Lie Manuel à la photo
+        m.add(pRes, SempicOnto.subject, SempicOnto.Manuel_Atencia);
+        
+        //enregistre
         s.saveModel(m);
+        
+        
+        
+        
+//        
+//        
+//        
+//        
+//        Resource newAnimal = m.createResource(SempicOnto.Dog);
+//        newAnimal.addLiteral(RDFS.label, "Medor");
+//        m.add(pRes, SempicOnto.depicts, newAnimal);
+//        m.write(System.out, "turtle");
+//
+//        s.saveModel(m);
+
+//Resource newAnimal = m.createResource(SempicOnto.Dog);
+//        newAnimal.addLiteral(RDFS.label, "Medor");
+//        m.add(pRes, SempicOnto.depicts, newAnimal);
+//        m.write(System.out, "turtle");
+//
+//        s.saveModel(m);
+//
+
+
+
+
+
         
         //s.deleteModel(m);
         //s.cnx.load(m);

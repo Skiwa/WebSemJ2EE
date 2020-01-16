@@ -30,11 +30,11 @@ public class BasicSempicRDFStore extends RDFStore {
         prefixes.setNsPrefix("sempic", SempicOnto.NS);
     }
     
-    public Resource createPhoto(long photoId, long albumId, long ownerId) {
+    public Resource createPicture(long pictureId, long albumId, long ownerId) {
         // create an empty RDF graph
         Model m = ModelFactory.createDefaultModel();
         // create an instance of Photo in Model m
-        Resource pRes = m.createResource(Namespaces.getPhotoUri(photoId), SempicOnto.Photo);
+        Resource pRes = m.createResource(Namespaces.getPhotoUri(pictureId), SempicOnto.Picture);
 
         pRes.addLiteral(SempicOnto.albumId, albumId);
         pRes.addLiteral(SempicOnto.ownerId, ownerId);
@@ -43,42 +43,42 @@ public class BasicSempicRDFStore extends RDFStore {
 
         return pRes;
     }
-
-    public void deletePhoto(long photoId) {
-        // create an instance of Photo in Model m
-        Resource pRes = ResourceFactory.createResource(Namespaces.getPhotoUri(photoId));
-        deleteResource(pRes);
-    }
-
-    /**
-     * Query a Photo and retrieve all the direct properties of the photo and if
-     * the property are depic, takenIn or takenBy, it also retrieve the labels
-     * of the object of these properties
-     *
-     * @param id
-     * @return
-     */
-    public Resource readPhoto(long id) {
-        String pUri = Namespaces.getPhotoUri(id);
-        ParameterizedSparqlString pss = new ParameterizedSparqlString(prefixes);
-        pss.setBaseUri(Namespaces.photoNS);
-        
-        pss.setCommandText(
-                "CONSTRUCT {"
-                        + "?photo ?p ?o ."
-                        + "?photo ?p1 ?o1 ."
-                        + "?o1 rdfs:label ?o2 ."
-                + "} WHERE { "
-                        + "?photo ?p ?o ."
-                        + "OPTIONAL {"
-                        + "?photo ?p1 ?o1 ."
-                        + "?o1 rdfs:label ?o2 ."
-                        + "FILTER (?p1 IN (<" + SempicOnto.depicts + ">,<" + SempicOnto.takenIn + ">,<" + SempicOnto.takenBy + ">)) "
-                        +"}"
-                 + "}");
-        pss.setIri("photo", pUri);
-        
-        Model m = cnx.queryConstruct(pss.asQuery());
-        return m.getResource(pUri);
-    }
+//
+//    public void deletePhoto(long photoId) {
+//        // create an instance of Photo in Model m
+//        Resource pRes = ResourceFactory.createResource(Namespaces.getPhotoUri(photoId));
+//        deleteResource(pRes);
+//    }
+//
+//    /**
+//     * Query a Photo and retrieve all the direct properties of the photo and if
+//     * the property are depic, takenIn or takenBy, it also retrieve the labels
+//     * of the object of these properties
+//     *
+//     * @param id
+//     * @return
+//     */
+//    public Resource readPhoto(long id) {
+//        String pUri = Namespaces.getPhotoUri(id);
+//        ParameterizedSparqlString pss = new ParameterizedSparqlString(prefixes);
+//        pss.setBaseUri(Namespaces.photoNS);
+//        
+//        pss.setCommandText(
+//                "CONSTRUCT {"
+//                        + "?photo ?p ?o ."
+//                        + "?photo ?p1 ?o1 ."
+//                        + "?o1 rdfs:label ?o2 ."
+//                + "} WHERE { "
+//                        + "?photo ?p ?o ."
+//                        + "OPTIONAL {"
+//                        + "?photo ?p1 ?o1 ."
+//                        + "?o1 rdfs:label ?o2 ."
+//                        + "FILTER (?p1 IN (<" + SempicOnto.depicts + ">,<" + SempicOnto.takenIn + ">,<" + SempicOnto.takenBy + ">)) "
+//                        +"}"
+//                 + "}");
+//        pss.setIri("photo", pUri);
+//        
+//        Model m = cnx.queryConstruct(pss.asQuery());
+//        return m.getResource(pUri);
+//    }
 }
