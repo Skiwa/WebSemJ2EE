@@ -37,7 +37,16 @@ and open the template in the editor.
                                             <f:param name="idAlbum" value="#{param.idAlbum}" />
                                     </h:commandButton>
                                   </h:form>
-                                
+                            <td>
+                                <h:form>
+                                    
+                                    <h:commandButton value="AddAnnot" action="#{createAnnotation.createAnnotation(sessionTools.connectedUser)}">
+                                    <f:param name="userId" value="#{user.id}"/>
+                                    <f:param name="idPicture" value="#{picture.id}" /> 
+                                    <f:param name="idAlbum" value="#{param.idAlbum}" />
+                                </h:commandButton>
+                                </h:form>
+                            </td>   
                             </td>
                         </tr>
                     </c:forEach>
