@@ -15,19 +15,17 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <h:form enctype="multipart/form-data">
-            <h:selectOneMenu value="#{selectedPicture}">
-            <f:selectItems value="#{createAnnotation.pictures}" />
-        </h:selectOneMenu>
-          <h:selectOneMenu value="#{selectedPerson}">
-            <f:selectItems value="#{createAnnotation.persons}" />
-        </h:selectOneMenu>  
-           
             
-            bouton GO
-        
-        
-</h:form>
-        <h:commandButton value="Test Annot" action="#{createAnnotation.displayChiass(selectedPicture, selectedPerson)}"/>
+        <h:form>
+            
+                <label for="idPicture">Id de la photo</label>
+                <input type="text" name="idPicture"/>
+            
+                <label for="person">Personne (Prenom Nom)</label>
+                <input type="text" name="person"/>
+                
+                <h:commandButton value="Test Annottttsdzsdds" action="#{createAnnotation.annotateSubject()}"/>
+         
+        </h:form>
     </body>
 </html>

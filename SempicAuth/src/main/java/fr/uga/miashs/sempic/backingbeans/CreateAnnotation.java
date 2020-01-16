@@ -125,4 +125,31 @@ public class CreateAnnotation {
        
         
     }
+    
+    public void annotateSubject(){
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String idPicture = request.getParameter("idPicture");
+        String person = request.getParameter("person");
+       
+        System.out.println("ici 1? " + idPicture);  
+        System.out.println("ici 2? " + person);
+
+        String nom = person.substring(person.indexOf(" ")+1);
+        String prenom = person.substring(0, person.indexOf(" "));
+        
+        
+        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        boolean personneExiste = cnx.queryAsk("ASK {?person a <https://example.com/ontology#Person>; <https://example.com/ontology#firstName> '"+prenom+ "'; <https://example.com/ontology#lastName> '"+nom+ "' }");
+        boolean photoExiste = cnx.queryAsk("ASK {?picture a <https://example.com/ontology#Picture>. FILTER (?picture = <http://miashs.univ-grenoble-alpes.fr/photo/"+idPicture+">)}");
+
+        
+        if(personneExiste && photoExiste){
+            System.out.println("Personneet photo existent, on peut push");
+        }else{
+            System.out.println("Personne ou photo existe pas");
+        }
+        
+    }
 }
