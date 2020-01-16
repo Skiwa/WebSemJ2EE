@@ -15,22 +15,14 @@ and open the template in the editor.
     </head>
     <body>
         <h:form>
-        <h:selectOneMenu value="selectedPicture">
+            <h:selectOneMenu value="#{selectedPicture}">
             <f:selectItems value="#{createAnnotation.pictures}" />
         </h:selectOneMenu>
             
-            ex:subject
-            
-            
-        <h:selectOneMenu value="selectedPerson">
-            <f:selectItems value="#{createAnnotation.persons}" />
-        </h:selectOneMenu>
+           
             
             bouton GO
-            <h:commandButton value="Test Annot" action="#{createAnnotation.displayChiass()}">
-                <f:param name="selectedPerson" value="selectedPerson" /> 
-                <f:param name="selectedPicture" value="selectedPicture" />
-            </h:commandButton>
+            <h:commandButton value="Test Annot" action="#{createAnnotation.displayChiass(selectedPicture)}"/>
         </h:form>
     </body>
 </html>

@@ -79,11 +79,10 @@ public class CreateAnnotation {
         QueryExecution qe = cnx.query("SELECT DISTINCT ?s WHERE {?s a <https://example.com/ontology#Picture>}");
         ResultSet rs = qe.execSelect();
         while (rs.hasNext()) {
-            QuerySolution qs = rs.next();
-            System.out.println(qs.getResource("s"));
-            list.add(qs.getResource("s").toString());
-        }
-
+             QuerySolution qs = rs.next();
+             System.out.println(qs.getResource("s"));
+             list.add(qs.getResource("s").toString());
+         }
         cnx.close();
         return list;
     }
@@ -95,7 +94,7 @@ public class CreateAnnotation {
         ResultSet rs = qe.execSelect();
         while (rs.hasNext()) {
             QuerySolution qs = rs.next();
-            System.out.println(qs.getResource("s"));
+            //System.out.println(qs.getResource("s"));
             list.add(qs.getResource("s").toString());
         }
 
@@ -110,22 +109,19 @@ public class CreateAnnotation {
         ResultSet rs = qe.execSelect();
         while (rs.hasNext()) {
             QuerySolution qs = rs.next();
-            System.out.println(qs.getResource("s"));
+            //System.out.println(qs.getResource("s"));
             list.add(qs.getResource("s").toString());
         }
 
         cnx.close();
         return list;
     }
-    public String displayChiass()throws SempicModelException {
+    public void displayChiass(String selectedPerson)throws SempicModelException {
 
-       Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-       String selectedPerson = params.get("selectedPerson"); 
-       String selectedPicture = params.get("selectedPicture");  
-       System.out.println("Selected person: " + selectedPerson);
        
-      System.out.println("Selected person: " + selectedPicture);
+       System.out.println("Selected person: " + selectedPerson);
+
+       
         
-         return "home";
     }
 }
