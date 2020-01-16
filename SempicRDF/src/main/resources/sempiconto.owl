@@ -297,6 +297,26 @@
 
     
 
+<!-- https://example.com/ontology#albumId -->
+
+    <owl:DatatypeProperty rdf:about="https://example.com/ontology#albumId">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label>in album</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.com/ontology#ownerId -->
+
+    <owl:DatatypeProperty rdf:about="https://example.com/ontology#ownerId">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label>has owner</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
 
     <!-- https://example.com/ontology#FN -->
 
