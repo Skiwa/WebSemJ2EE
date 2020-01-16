@@ -191,8 +191,7 @@
 
     <owl:ObjectProperty rdf:about="https://example.com/ontology#owner">
         <owl:inverseOf rdf:resource="https://example.com/ontology#pet"/>
-    </owl:ObjectProperty>
-    
+    </owl:ObjectProperty> 
 
 
     <!-- https://example.com/ontology#parent -->
@@ -545,6 +544,11 @@
         <rdfs:subClassOf rdf:resource="https://example.com/ontology#Party"/>
     </owl:Class>
     
+     <!-- https://example.com/ontology#House_Warming -->
+
+    <owl:Class rdf:about="https://example.com/ontology#House_Warming">
+        <rdfs:subClassOf rdf:resource="https://example.com/ontology#Party"/>
+    </owl:Class>
 
 
     <!-- https://example.com/ontology#Female -->

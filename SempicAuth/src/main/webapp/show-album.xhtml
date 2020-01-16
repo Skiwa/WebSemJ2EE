@@ -51,9 +51,10 @@ and open the template in the editor.
                         </tr>
                     </c:forEach>
             </table>
-        
+       
         
         <h:button outcome="create-picture" value="Ajouter une photo"><f:param name="idAlbum" value="#{param.idAlbum}"/></h:button>
+        <h:button outcome="create-annotation" value="Ajouter une annotation"><f:param name="idAlbum" value="#{param.idAlbum}"/></h:button>
         <h:button outcome="back-home" value="Retour"/>
     </body>
 </html>
