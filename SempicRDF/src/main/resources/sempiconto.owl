@@ -5,8 +5,7 @@
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
      xmlns:xml="http://www.w3.org/XML/1998/namespace"
      xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-     xmlns:ontology="https://example.com/ontology#">
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
     <owl:Ontology rdf:about="https://example.com/ontology">
         <owl:versionIRI rdf:resource="https://example.com/ontology"/>
     </owl:Ontology>
@@ -36,6 +35,14 @@
     
 
 
+    <!-- https://example.com/ontology#city -->
+
+    <owl:ObjectProperty rdf:about="https://example.com/ontology#city">
+        <rdfs:subPropertyOf rdf:resource="https://example.com/ontology#location"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://example.com/ontology#colleague -->
 
     <owl:ObjectProperty rdf:about="https://example.com/ontology#colleague">
@@ -51,6 +58,16 @@
     <owl:ObjectProperty rdf:about="https://example.com/ontology#company">
         <rdfs:domain rdf:resource="https://example.com/ontology#Job"/>
         <rdfs:range rdf:resource="https://example.com/ontology#Company"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.com/ontology#country -->
+
+    <owl:ObjectProperty rdf:about="https://example.com/ontology#country">
+        <rdfs:subPropertyOf rdf:resource="https://example.com/ontology#location"/>
+        <rdfs:domain rdf:resource="https://example.com/ontology#Region"/>
+        <rdfs:range rdf:resource="https://example.com/ontology#Country"/>
     </owl:ObjectProperty>
     
 
@@ -93,6 +110,17 @@
     
 
 
+    <!-- https://example.com/ontology#friend -->
+
+    <owl:ObjectProperty rdf:about="https://example.com/ontology#friend">
+        <rdfs:subPropertyOf rdf:resource="https://example.com/ontology#relation"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:domain rdf:resource="https://example.com/ontology#Person"/>
+        <rdfs:range rdf:resource="https://example.com/ontology#Person"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://example.com/ontology#husband -->
 
     <owl:ObjectProperty rdf:about="https://example.com/ontology#husband">
@@ -100,6 +128,15 @@
         <owl:inverseOf rdf:resource="https://example.com/ontology#wife"/>
         <rdfs:domain rdf:resource="https://example.com/ontology#Female"/>
         <rdfs:range rdf:resource="https://example.com/ontology#Male"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.com/ontology#job -->
+
+    <owl:ObjectProperty rdf:about="https://example.com/ontology#job">
+        <rdfs:domain rdf:resource="https://example.com/ontology#Person"/>
+        <rdfs:range rdf:resource="https://example.com/ontology#Job"/>
     </owl:ObjectProperty>
     
 
@@ -178,6 +215,22 @@
     
 
 
+    <!-- https://example.com/ontology#region -->
+
+    <owl:ObjectProperty rdf:about="https://example.com/ontology#region">
+        <rdfs:subPropertyOf rdf:resource="https://example.com/ontology#location"/>
+        <rdfs:domain rdf:resource="https://example.com/ontology#City"/>
+        <rdfs:range rdf:resource="https://example.com/ontology#Region"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://example.com/ontology#relation -->
+
+    <owl:ObjectProperty rdf:about="https://example.com/ontology#relation"/>
+    
+
+
     <!-- https://example.com/ontology#sibling -->
 
     <owl:ObjectProperty rdf:about="https://example.com/ontology#sibling">
@@ -234,32 +287,6 @@
     
 
 
-    <!-- https://example.com/ontology#friend -->
-
-    <owl:ObjectProperty rdf:about="https://example.com/ontology#friend">
-        <rdfs:subPropertyOf rdf:resource="https://example.com/ontology#relation"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
-        <rdfs:domain rdf:resource="https://example.com/ontology#Person"/>
-        <rdfs:range rdf:resource="https://example.com/ontology#Person"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://example.com/ontology#job -->
-
-    <owl:ObjectProperty rdf:about="https://example.com/ontology#job">
-        <rdfs:domain rdf:resource="https://example.com/ontology#Person"/>
-        <rdfs:range rdf:resource="https://example.com/ontology#Job"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://example.com/ontology#relation -->
-
-    <owl:ObjectProperty rdf:about="https://example.com/ontology#relation"/>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -270,7 +297,7 @@
 
     
 
-    <!-- https://example.com/ontology#albumId -->
+<!-- https://example.com/ontology#albumId -->
 
     <owl:DatatypeProperty rdf:about="https://example.com/ontology#albumId">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
@@ -287,8 +314,8 @@
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:label>has owner</rdfs:label>
     </owl:DatatypeProperty>
-
-
+    
+    
     <!-- https://example.com/ontology#FN -->
 
     <owl:DatatypeProperty rdf:about="https://example.com/ontology#FN">
@@ -345,6 +372,15 @@
 
     <owl:DatatypeProperty rdf:about="https://example.com/ontology#lastName">
         <rdfs:domain rdf:resource="https://example.com/ontology#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.com/ontology#placeName -->
+
+    <owl:DatatypeProperty rdf:about="https://example.com/ontology#placeName">
+        <rdfs:domain rdf:resource="https://example.com/ontology#Place"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     </owl:DatatypeProperty>
     
@@ -427,6 +463,20 @@
     
 
 
+    <!-- https://example.com/ontology#Company -->
+
+    <owl:Class rdf:about="https://example.com/ontology#Company"/>
+    
+
+
+    <!-- https://example.com/ontology#Country -->
+
+    <owl:Class rdf:about="https://example.com/ontology#Country">
+        <rdfs:subClassOf rdf:resource="https://example.com/ontology#Place"/>
+    </owl:Class>
+    
+
+
     <!-- https://example.com/ontology#Cow -->
 
     <owl:Class rdf:about="https://example.com/ontology#Cow">
@@ -448,6 +498,12 @@
     <owl:Class rdf:about="https://example.com/ontology#Developer">
         <rdfs:subClassOf rdf:resource="https://example.com/ontology#Job"/>
     </owl:Class>
+    
+
+
+    <!-- https://example.com/ontology#Device -->
+
+    <owl:Class rdf:about="https://example.com/ontology#Device"/>
     
 
 
@@ -631,6 +687,14 @@
     
 
 
+    <!-- https://example.com/ontology#Region -->
+
+    <owl:Class rdf:about="https://example.com/ontology#Region">
+        <rdfs:subClassOf rdf:resource="https://example.com/ontology#Place"/>
+    </owl:Class>
+    
+
+
     <!-- https://example.com/ontology#Sea -->
 
     <owl:Class rdf:about="https://example.com/ontology#Sea">
@@ -671,18 +735,6 @@
     
 
 
-    <!-- https://example.com/ontology#Company -->
-
-    <owl:Class rdf:about="https://example.com/ontology#Company"/>
-    
-
-
-    <!-- https://example.com/ontology#Device -->
-
-    <owl:Class rdf:about="https://example.com/ontology#Device"/>
-    
-
-
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -699,6 +751,8 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Alpes">
         <rdf:type rdf:resource="https://example.com/ontology#Mountain"/>
         <rdf:type rdf:resource="https://example.com/ontology#Place"/>
+        <region rdf:resource="https://example.com/ontology#Auvergne_Rhone_Alpes"/>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Alps</placeName>
     </owl:NamedIndividual>
     
 
@@ -725,11 +779,23 @@
     
 
 
+    <!-- https://example.com/ontology#Auvergne_Rhone_Alpes -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Auvergne_Rhone_Alpes">
+        <rdf:type rdf:resource="https://example.com/ontology#Region"/>
+        <country rdf:resource="https://example.com/ontology#France"/>
+        <placeName xml:lang="en">Auvergne-Rhône-Alpes</placeName>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://example.com/ontology#Barcelone -->
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Barcelone">
         <rdf:type rdf:resource="https://example.com/ontology#City"/>
         <locationEvent rdf:resource="https://example.com/ontology#JazzBarcelone2020"/>
+        <region rdf:resource="https://example.com/ontology#Catalonia"/>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Barcelona</placeName>
     </owl:NamedIndividual>
     
 
@@ -742,10 +808,21 @@
     
 
 
+    <!-- https://example.com/ontology#Catalonia -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Catalonia">
+        <rdf:type rdf:resource="https://example.com/ontology#Region"/>
+        <country rdf:resource="https://example.com/ontology#Spain"/>
+        <placeName xml:lang="en">Catalonia</placeName>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://example.com/ontology#DomicileFatima -->
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#DomicileFatima">
         <rdf:type rdf:resource="https://example.com/ontology#Domicile"/>
+        <city rdf:resource="https://example.com/ontology#Grenoble"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue de Fatima</address>
     </owl:NamedIndividual>
     
@@ -755,6 +832,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#DomicileJerome">
         <rdf:type rdf:resource="https://example.com/ontology#Domicile"/>
+        <city rdf:resource="https://example.com/ontology#Grenoble"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue de Jerome</address>
     </owl:NamedIndividual>
     
@@ -764,6 +842,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#DomicileJulien">
         <rdf:type rdf:resource="https://example.com/ontology#Domicile"/>
+        <city rdf:resource="https://example.com/ontology#Grenoble"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue de Julien</address>
     </owl:NamedIndividual>
     
@@ -773,6 +852,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#DomicileManuel">
         <rdf:type rdf:resource="https://example.com/ontology#Domicile"/>
+        <city rdf:resource="https://example.com/ontology#Grenoble"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 calle de Manuel</address>
     </owl:NamedIndividual>
     
@@ -782,6 +862,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#DomicileNicolas">
         <rdf:type rdf:resource="https://example.com/ontology#Domicile"/>
+        <city rdf:resource="https://example.com/ontology#Grenoble"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue de Nicolas</address>
     </owl:NamedIndividual>
     
@@ -791,6 +872,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#DomicileSadok">
         <rdf:type rdf:resource="https://example.com/ontology#Domicile"/>
+        <city rdf:resource="https://example.com/ontology#Sassenage"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue de Sadok</address>
     </owl:NamedIndividual>
     
@@ -800,7 +882,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Fatima_Belounis">
         <rdf:type rdf:resource="https://example.com/ontology#Female"/>
-        <ontology:job rdf:resource="https://example.com/ontology#JobFatima"/>
+        <job rdf:resource="https://example.com/ontology#JobFatima"/>
         <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1970-01-01T00:00:00</birthday>
         <firstName>Fatima</firstName>
         <lastName>Belounis</lastName>
@@ -813,6 +895,34 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Felix">
         <rdf:type rdf:resource="https://example.com/ontology#Cat"/>
         <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Felix</firstName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#France -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#France">
+        <rdf:type rdf:resource="https://example.com/ontology#Country"/>
+        <placeName xml:lang="en">France</placeName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Grenoble -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Grenoble">
+        <rdf:type rdf:resource="https://example.com/ontology#City"/>
+        <region rdf:resource="https://example.com/ontology#Auvergne_Rhone_Alpes"/>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Grenoble</placeName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#HouseWarmingJulien -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#HouseWarmingJulien">
+        <rdf:type rdf:resource="https://example.com/ontology#House_Warming"/>
+        <title>Crémaillère de Julien</title>
     </owl:NamedIndividual>
     
 
@@ -831,9 +941,9 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Jerome_David">
         <rdf:type rdf:resource="https://example.com/ontology#Male"/>
+        <friend rdf:resource="https://example.com/ontology#Manuel_Atencia"/>
+        <job rdf:resource="https://example.com/ontology#JobJerome"/>
         <livesAt rdf:resource="https://example.com/ontology#DomicileJerome"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Manuel_Atencia"/>
-        <ontology:job rdf:resource="https://example.com/ontology#JobJerome"/>
         <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1972-01-01T00:00:00</birthday>
         <firstName>Jérôme</firstName>
         <lastName>David</lastName>
@@ -899,10 +1009,10 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Julien_Haegman">
         <rdf:type rdf:resource="https://example.com/ontology#Male"/>
+        <friend rdf:resource="https://example.com/ontology#Nicolas_Gau"/>
+        <friend rdf:resource="https://example.com/ontology#Sadok_Ben_Fredj"/>
         <livesAt rdf:resource="https://example.com/ontology#DomicileJulien"/>
         <sibling rdf:resource="https://example.com/ontology#Jerome_Haegman"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Nicolas_Gau"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Sadok_Ben_Fredj"/>
         <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1997-12-09T00:00:00</birthday>
         <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Julien</firstName>
         <lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Haegman</lastName>
@@ -915,12 +1025,12 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Manuel_Atencia">
         <rdf:type rdf:resource="https://example.com/ontology#Male"/>
         <child rdf:resource="https://example.com/ontology#Artemis_Atencia"/>
+        <friend rdf:resource="https://example.com/ontology#Jerome_David"/>
+        <job rdf:resource="https://example.com/ontology#JobManuel"/>
         <livesAt rdf:resource="https://example.com/ontology#DomicileManuel"/>
         <pet rdf:resource="https://example.com/ontology#Felix"/>
         <pet rdf:resource="https://example.com/ontology#Rex"/>
         <wife rdf:resource="https://example.com/ontology#Manuella_Atencia"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Jerome_David"/>
-        <ontology:job rdf:resource="https://example.com/ontology#JobManuel"/>
         <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1980-01-01T00:00:00</birthday>
         <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manuel</firstName>
         <lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Atencia</lastName>
@@ -948,15 +1058,23 @@
     
 
 
+    <!-- https://example.com/ontology#NewYearsEve -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#NewYearsEve">
+        <rdf:type rdf:resource="https://example.com/ontology#Holiday"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://example.com/ontology#Nicolas_Gau -->
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Nicolas_Gau">
         <rdf:type rdf:resource="https://example.com/ontology#Male"/>
+        <friend rdf:resource="https://example.com/ontology#Julien_Haegman"/>
+        <friend rdf:resource="https://example.com/ontology#Sadok_Ben_Fredj"/>
+        <job rdf:resource="https://example.com/ontology#JobNicolas"/>
         <livesAt rdf:resource="https://example.com/ontology#DomicileNicolas"/>
         <where rdf:resource="https://example.com/ontology#Barcelone"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Julien_Haegman"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Sadok_Ben_Fredj"/>
-        <ontology:job rdf:resource="https://example.com/ontology#JobNicolas"/>
         <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1996-01-01T00:00:00</birthday>
         <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Nicolas</firstName>
         <lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Gau</lastName>
@@ -968,6 +1086,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#OfficeThales">
         <rdf:type rdf:resource="https://example.com/ontology#Office"/>
+        <city rdf:resource="https://example.com/ontology#Grenoble"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue de Thales</address>
     </owl:NamedIndividual>
     
@@ -977,7 +1096,22 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#OfficeUGA">
         <rdf:type rdf:resource="https://example.com/ontology#Office"/>
+        <city rdf:resource="https://example.com/ontology#Grenoble"/>
         <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue de l&apos;UGA</address>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#PictureAlpes -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#PictureAlpes">
+        <rdf:type rdf:resource="https://example.com/ontology#Picture"/>
+        <creator rdf:resource="https://example.com/ontology#Julien_Haegman"/>
+        <takenOn rdf:resource="https://example.com/ontology#Xiaomi_Pocophone_F1"/>
+        <what rdf:resource="https://example.com/ontology#Alpes"/>
+        <where rdf:resource="https://example.com/ontology#Alpes"/>
+        <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Photo des Alpes</title>
+        <when rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-01T01:01:01</when>
     </owl:NamedIndividual>
     
 
@@ -996,114 +1130,6 @@
         <where rdf:resource="https://example.com/ontology#Sant_Sebastia"/>
         <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Manu et Jerome en vacances à Barcelone</title>
         <when rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-07-01T00:00:00</when>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#Rex -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#Rex">
-        <rdf:type rdf:resource="https://example.com/ontology#Dog"/>
-        <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rex</firstName>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#Sadok_Ben_Fredj -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#Sadok_Ben_Fredj">
-        <rdf:type rdf:resource="https://example.com/ontology#Male"/>
-        <livesAt rdf:resource="https://example.com/ontology#DomicileSadok"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Julien_Haegman"/>
-        <ontology:friend rdf:resource="https://example.com/ontology#Nicolas_Gau"/>
-        <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue du mage noir</address>
-        <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1995-01-01T00:00:00</birthday>
-        <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sadok</firstName>
-        <lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ben Fredj</lastName>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#Sant_Sebastia -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#Sant_Sebastia">
-        <rdf:type rdf:resource="https://example.com/ontology#Beach"/>
-        <rdf:type rdf:resource="https://example.com/ontology#Place"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#Thales -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#Thales">
-        <rdf:type rdf:resource="https://example.com/ontology#Company"/>
-        <officeLocation rdf:resource="https://example.com/ontology#OfficeThales"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#TripBarcelone -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#TripBarcelone">
-        <rdf:type rdf:resource="https://example.com/ontology#Event"/>
-        <eventName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vacances à Barcelone</eventName>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#UGA -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#UGA">
-        <rdf:type rdf:resource="https://example.com/ontology#Company"/>
-        <officeLocation rdf:resource="https://example.com/ontology#OfficeUGA"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#Xiaomi -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#Xiaomi">
-        <rdf:type rdf:resource="https://example.com/ontology#Company"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#Xiaomi_Pocophone_F1 -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#Xiaomi_Pocophone_F1">
-        <rdf:type rdf:resource="https://example.com/ontology#Phone"/>
-        <manufacturedBy rdf:resource="https://example.com/ontology#Xiaomi"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#HouseWarmingJulien -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#HouseWarmingJulien">
-        <rdf:type rdf:resource="https://example.com/ontology#House_Warming"/>
-        <title>Crémaillère de Julien</title>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#NewYearsEve -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#NewYearsEve">
-        <rdf:type rdf:resource="https://example.com/ontology#Holiday"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://example.com/ontology#PictureAlpes -->
-
-    <owl:NamedIndividual rdf:about="https://example.com/ontology#PictureAlpes">
-        <rdf:type rdf:resource="https://example.com/ontology#Picture"/>
-        <creator rdf:resource="https://example.com/ontology#Julien_Haegman"/>
-        <takenOn rdf:resource="https://example.com/ontology#Xiaomi_Pocophone_F1"/>
-        <what rdf:resource="https://example.com/ontology#Alpes"/>
-        <where rdf:resource="https://example.com/ontology#Alpes"/>
-        <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Photo des Alpes</title>
-        <when rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-07-01T01:01:01</when>
     </owl:NamedIndividual>
     
 
@@ -1176,6 +1202,104 @@
         <where rdf:resource="https://example.com/ontology#OfficeUGA"/>
         <title rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Photo avec les collègues</title>
         <when rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2019-09-25T00:00:00</when>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Rex -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Rex">
+        <rdf:type rdf:resource="https://example.com/ontology#Dog"/>
+        <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rex</firstName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Sadok_Ben_Fredj -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Sadok_Ben_Fredj">
+        <rdf:type rdf:resource="https://example.com/ontology#Male"/>
+        <friend rdf:resource="https://example.com/ontology#Julien_Haegman"/>
+        <friend rdf:resource="https://example.com/ontology#Nicolas_Gau"/>
+        <livesAt rdf:resource="https://example.com/ontology#DomicileSadok"/>
+        <address rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1 rue du mage noir</address>
+        <birthday rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">1995-01-01T00:00:00</birthday>
+        <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sadok</firstName>
+        <lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ben Fredj</lastName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Sant_Sebastia -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Sant_Sebastia">
+        <rdf:type rdf:resource="https://example.com/ontology#Beach"/>
+        <rdf:type rdf:resource="https://example.com/ontology#Place"/>
+        <city rdf:resource="https://example.com/ontology#Barcelone"/>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sant Sebastia</placeName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Sassenage -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Sassenage">
+        <rdf:type rdf:resource="https://example.com/ontology#City"/>
+        <region rdf:resource="https://example.com/ontology#Auvergne_Rhone_Alpes"/>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sassenage</placeName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Spain -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Spain">
+        <rdf:type rdf:resource="https://example.com/ontology#Country"/>
+        <placeName xml:lang="en">Spain</placeName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Thales -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Thales">
+        <rdf:type rdf:resource="https://example.com/ontology#Company"/>
+        <officeLocation rdf:resource="https://example.com/ontology#OfficeThales"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#TripBarcelone -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#TripBarcelone">
+        <rdf:type rdf:resource="https://example.com/ontology#Event"/>
+        <eventName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Vacances à Barcelone</eventName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#UGA -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#UGA">
+        <rdf:type rdf:resource="https://example.com/ontology#Company"/>
+        <officeLocation rdf:resource="https://example.com/ontology#OfficeUGA"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Xiaomi -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Xiaomi">
+        <rdf:type rdf:resource="https://example.com/ontology#Company"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://example.com/ontology#Xiaomi_Pocophone_F1 -->
+
+    <owl:NamedIndividual rdf:about="https://example.com/ontology#Xiaomi_Pocophone_F1">
+        <rdf:type rdf:resource="https://example.com/ontology#Phone"/>
+        <manufacturedBy rdf:resource="https://example.com/ontology#Xiaomi"/>
     </owl:NamedIndividual>
 </rdf:RDF>
 
