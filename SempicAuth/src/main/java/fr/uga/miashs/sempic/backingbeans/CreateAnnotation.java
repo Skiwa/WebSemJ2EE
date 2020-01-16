@@ -80,7 +80,7 @@ public class CreateAnnotation {
         ResultSet rs = qe.execSelect();
         while (rs.hasNext()) {
              QuerySolution qs = rs.next();
-             System.out.println(qs.getResource("s"));
+             //System.out.println(qs.getResource("s"));
              list.add(qs.getResource("s").toString());
          }
         cnx.close();
@@ -116,10 +116,11 @@ public class CreateAnnotation {
         cnx.close();
         return list;
     }
-    public void displayChiass(String selectedPerson)throws SempicModelException {
+    public void displayChiass(String selectedPicture, String selectedPerson)throws SempicModelException {
 
        
        System.out.println("Selected person: " + selectedPerson);
+              System.out.println("Selected picture: " + selectedPicture);
 
        
         
