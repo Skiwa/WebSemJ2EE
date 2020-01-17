@@ -128,19 +128,15 @@ public class CreatePicture implements Serializable {
        
         
        current.setAlbum(album);
-       System.out.println("CON DE T MORT: "+myPicture);
+      
        current.setImage(myPicture);
        pictureDao.create(current);
        BasicSempicRDFStore s = new BasicSempicRDFStore();
        Model m = ModelFactory.createDefaultModel();
 
-        System.out.println("CURRENT USER" + currentUser.getId());
         //Crée une photo
         //(id picture, id album, id owner)
         Resource pRes = s.createPicture(current.getId(), Long.parseLong(idAlbum), currentUser.getId());          
-        //Lie Manuel à la photo
-        System.out.println("RESSOURCE PICTURE"+ pRes);
-        
         //enregistre
         s.saveModel(m);
         return "show-album?faces-redirect=true&idAlbum=" + idAlbum;
