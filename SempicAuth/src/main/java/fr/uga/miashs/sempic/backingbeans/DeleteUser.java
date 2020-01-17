@@ -48,9 +48,7 @@ public class DeleteUser implements Serializable {
         try {
             if(currentUser.getId() != user.getId()){
             userDao.delete(user);
-            System.out.println("User = pas moi ");
             }else{
-                System.out.println("User = moi bg");
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Vous ne pouvez pas vous supprimer"));
             }
         } 
