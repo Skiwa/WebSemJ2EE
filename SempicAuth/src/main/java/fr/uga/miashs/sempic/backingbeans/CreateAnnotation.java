@@ -87,15 +87,7 @@ public class CreateAnnotation implements Serializable{
         cnx.close();
         return list;
     }
-    public void displayChiass(String selectedPicture, String selectedPerson)throws SempicModelException {
-
-       
-       System.out.println("Selected person: " + selectedPerson);
-              System.out.println("Selected picture: " + selectedPicture);
-
-       
-        
-    }
+    
     //Process pour annoter une photo avec un individu
     public void annotateSubject(){
         
@@ -147,6 +139,7 @@ public class CreateAnnotation implements Serializable{
         }else{
             System.out.println("Personne ou endroit existe pas");
         }
+        cnx.close();
      
     }
     
@@ -200,5 +193,6 @@ public class CreateAnnotation implements Serializable{
         }else{
             System.out.println("Personne ou endroit existe pas");
         }
+        cnx.close();
     }
 }

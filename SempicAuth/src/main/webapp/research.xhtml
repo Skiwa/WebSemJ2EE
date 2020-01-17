@@ -20,7 +20,6 @@ and open the template in the editor.
             <span>Photos avec au moins 1 personne </span><h:commandButton action="#{research.searchBy1orMorePerson}" value="GO"/><br></br>
             <span>Photos avec aucunes personnes </span><h:commandButton action="#{research.searchWithNobody}" value="GO"/><br></br>
             <span>Photos avec : (Prénom Nom) </span><input type="text" name="nameProperty"/><h:commandButton action="#{research.searchWithX}" value="GO"/><br></br>
-            <span>Photos avec : (Nom Prénom) <input type="text" name="nameProp1"/> et <input type="text" name="nameProp2"/> </span><h:commandButton action="#{research.searchWithXandY}" value="GO"/><br></br>
             <span>Photos avec des animaux </span><h:commandButton action="#{research.searchWithAnimals}" value="GO"/><br></br>
             <span>Photos avec l'animal de : (Prénom Nom) </span><input type="text" name="nameUsersPet"/><h:commandButton action="#{research.searchWithAnimalsofX}" value="GO"/><br></br>
             <span>Photos avec des enfants </span><h:commandButton action="#{research.searchWithChilds}" value="GO"/><br></br>
@@ -28,9 +27,6 @@ and open the template in the editor.
             <span>Photos avec seulement des gens amis </span><h:commandButton action="#{research.searchWithOnlyFriends}" value="GO"/><br></br>
             
             <span>Photos avec seulement des amis de : (Prénom Nom) </span><input type="text" name="nameUserFriend"/><h:commandButton action="#{research.searchWithOnlyFriendsofX}" value="GO"/><br></br>
-
-            <span>Photos avec seulement des amis de X </span><h:commandButton action="#{research.searchWithOnlyFriendsofX}" value="GO"/><br></br>
-            <br/>
             
             <span>Photos prises à un évènement culturel </span><h:commandButton action="#{research.searchAtCulturalEvent}" value="GO"/><br></br>
             <span>Photos prises à un festival </span><h:commandButton action="#{research.searchWhereFestival}" value="GO"/><br></br>

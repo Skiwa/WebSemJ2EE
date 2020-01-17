@@ -119,43 +119,6 @@ public class Research {
         
     }
     
-    //Recherche photos avec 2 personnes données X et Y
-    //TODO : Retravailler la query 
-    public void searchWithXandY(){
-        System.out.println("Request searchWithXandY");
-        
-        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-        String nameProperty1 = request.getParameter("nameProp1");
-        String nameProperty2 = request.getParameter("nameProp2");
-        
-        String name1 = nameProperty1.substring(nameProperty1.indexOf(" ")+1);
-        String firstname1 = nameProperty1.substring(0,nameProperty1.indexOf(" "));
-        
-        String name2 = nameProperty2.substring(nameProperty2.indexOf(" ")+1);
-        String firstname2 = nameProperty2.substring(0,nameProperty2.indexOf(" "));
-        
-        //System.out.println("P1 : "+firstname1+" "+name1);
-        //System.out.println("P2 : "+firstname2+" "+name2);
-        
-        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
-        
-        String pref = ("PREFIX ex: <https://example.com/ontology#>\n");
-        QueryExecution qe = cnx.query(pref+"SELECT ?picture\n" +
-                    "WHERE {\n" +
-                    " ?picture a ex:Picture;\n" +
-                    "     ex:subject ?p1.\n" +
-                    "}");
-        
-        ResultSet rs = qe.execSelect();
-        while (rs.hasNext()) {
-            QuerySolution qs = rs.next();
-            System.out.println(qs.getResource("?picture"));
-            pictures.add(qs.getResource("?picture"));
-        }
-        cnx.close();
-        
-    }
-    
     
     //Recherche photos avec des animaux
     public void searchWithAnimals(){
@@ -233,9 +196,12 @@ public class Research {
                     "WHERE {\n" +
                     "  ?picture a ex:Picture;\n" +
                     "           ex:subject ?child.\n" +
+                    "\n" +
                     "  ?child ex:birthday ?birthday.\n" +
+                    "\n" +
                     "  FILTER (\n" +
                     "    ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)<18)\n" +
+                    "  )\n" +
                     "}");
         
         ResultSet rs = qe.execSelect();
@@ -256,13 +222,14 @@ public class Research {
         
         String pref = ("PREFIX ex: <https://example.com/ontology#>\n");
         QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
-                    "WHERE {\n" +
-                    " ?picture a ex:Picture;\n" +
-                    " ex:subject ?child.\n" +
-                    " ?child ex:birthday ?birthday.\n" +
-                    " FILTER (\n" +
-                    " ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)>=18)\n" +
-                    "}");
+                        "WHERE {\n" +
+                        " ?picture a ex:Picture;\n" +
+                        " ex:subject ?child.\n" +
+                        " ?child ex:birthday ?birthday.\n" +
+                        " FILTER (\n" +
+                        " ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)>=18)\n" +
+                        " )\n" +
+                        "}");
         
         ResultSet rs = qe.execSelect();
         while (rs.hasNext()) {
