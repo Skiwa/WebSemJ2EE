@@ -120,6 +120,7 @@ public class Research {
     }
     
     //Recherche photos avec 2 personnes données X et Y
+    //TODO : Retravailler la query 
     public void searchWithXandY(){
         System.out.println("Request searchWithXandY");
         
@@ -168,7 +169,6 @@ public class Research {
                         "WHERE {\n" +
                         " ?picture a ex:Picture;\n" +
                         "     ex:what ?animal.\n" +
-                        "\n" +
                         "  ?animal a ?animalType.\n" +
                         "  ?animalType rdfs:subClassOf ex:Animal\n" +
                         "}");
@@ -184,7 +184,6 @@ public class Research {
     }
     
     //Recherche photos avec l'animal de X
-    //TODO : Retravailler la query 
     public void searchWithAnimalsofX(){
         System.out.println("Request searchWithAnimalsofX");
         
@@ -234,12 +233,9 @@ public class Research {
                     "WHERE {\n" +
                     "  ?picture a ex:Picture;\n" +
                     "           ex:subject ?child.\n" +
-                    "\n" +
                     "  ?child ex:birthday ?birthday.\n" +
-                    "\n" +
                     "  FILTER (\n" +
                     "    ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)<18)\n" +
-                    "  )\n" +
                     "}");
         
         ResultSet rs = qe.execSelect();
@@ -266,7 +262,6 @@ public class Research {
                     " ?child ex:birthday ?birthday.\n" +
                     " FILTER (\n" +
                     " ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)>=18)\n" +
-                    " )\n" +
                     "}");
         
         ResultSet rs = qe.execSelect();
@@ -291,11 +286,9 @@ public class Research {
                 "  ?picture a ex:Picture;\n" +
                 "      ex:subject ?person;\n" +
                 "      ex:subject ?personFriend.\n" +
-                "\n" +
                 "  ?person a ?personType.\n" +
                 "  ?personFriend a ?personType.\n" +
                 "  ?personType rdfs:subClassOf ex:Person.\n" +
-                "\n" +
                 "  ?person ex:friend ?personFriend.\n" +
                 "  ?personFriend ex:friend ?person.\n" +
                 "}");
