@@ -12,17 +12,6 @@
   }
   ```
 
-- Toutes les photos de plusieurs personnes
-  
-  ```sql
-  SELECT ?picture
-  WHERE {
-   ?picture a ex:Picture;
-       ex:subject ex:Manuel_Atencia;
-       ex:subject ex:Jerome_David.
-  }
-  ```
-
 - Toutes les photos avec des personnes
   
   ```sql
@@ -238,9 +227,6 @@
   HAVING (?count = 1)
   ```
 
-- Toutes les photos avec uniquement des gens venant d'un endroit
-  
-  TODO
 
 - Toutes les photos avec des gens qui sont collègues
   
