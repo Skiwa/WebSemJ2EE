@@ -51,29 +51,12 @@ public class CreateAnnotation implements Serializable{
     
     @Inject
     private SempicPictureFacade pictureDao;
-
+    private Resource picture;
+    private Resource persons;
+    private Resource places;
    public CreateAnnotation() {
     }
-    
-    public String createAnnotation(SempicUser currentUser) throws SempicModelException {
 
-        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String idAlbum = params.get("idAlbum"); 
-        String idPicture = params.get("idPicture");        
-        BasicSempicRDFStore s = new BasicSempicRDFStore();
-        Model m = ModelFactory.createDefaultModel();
-
-        System.out.println("CURRENT USER" + currentUser.getId());
-        //Crée une photo
-        //(id picture, id album, id owner)
-        Resource pRes = s.createPicture(Long.parseLong(idPicture), Long.parseLong(idAlbum), currentUser.getId());          
-        //Lie Manuel à la photo
-        m.add(pRes, SempicOnto.subject, SempicOnto.Manuel_Atencia);
-        
-        //enregistre
-        s.saveModel(m);
-         return "show-album?faces-redirect=true&idAlbum="+idAlbum;
-    }
 
     public List<String> getPictures() {
         ArrayList<String> list=new ArrayList<String>();
@@ -113,20 +96,66 @@ public class CreateAnnotation implements Serializable{
        
         
     }
-    
-    public void annotateSubject(String selectedPerson){
+    //Process pour annoter une photo avec un individu
+    public void annotateSubject(){
         
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String idPicture = request.getParameter("idPicture");
-       
+        String person = request.getParameter("person");
+     
         System.out.println("ici 1? " + idPicture);  
-        System.out.println("ici 2? " + selectedPerson);
+        System.out.println("ici 2? " + person);
 
- 
+        String nom = person.substring(person.indexOf(" ")+1);
+        String prenom = person.substring(0, person.indexOf(" "));
+        
         RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        boolean personneExiste = cnx.queryAsk("ASK {?person a <https://example.com/ontology#Person>; <https://example.com/ontology#firstName> '"+prenom+ "'; <https://example.com/ontology#lastName> '"+nom+ "' }");
+        boolean photoExiste = cnx.queryAsk("ASK {?picture a <https://example.com/ontology#Picture>. FILTER (?picture = <http://miashs.univ-grenoble-alpes.fr/photo/"+idPicture+">)}");
+        
+        System.out.println("--"+personneExiste);
+        System.out.println("--"+photoExiste);
+        
+        if(personneExiste && photoExiste){
+            BasicSempicRDFStore s = new BasicSempicRDFStore();
+            
+            Model m = ModelFactory.createDefaultModel();
+            QueryExecution qe = cnx.query("SELECT DISTINCT ?person WHERE {?person a <https://example.com/ontology#Person>; <https://example.com/ontology#firstName> '"+prenom+ "'; <https://example.com/ontology#lastName> '"+nom+ "' }");
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution qs = rs.next();
+                System.out.println("Query: "+qs.getResource("person"));
+                persons = qs.getResource("person");
+            };
+        
+            QueryExecution qp = cnx.query("SELECT DISTINCT ?picture WHERE {?picture ?p ?o. FILTER(?picture = <http://miashs.univ-grenoble-alpes.fr/photo/"+idPicture + ">)}");
+            ResultSet rp = qp.execSelect();
+            while (rp.hasNext()) {
+                QuerySolution qpp = rp.next();
+                System.out.println("Query: "+qpp.getResource("picture"));
+                picture = qpp.getResource("picture");
+            };
+        
+            System.out.println("res1 : " + persons);
+            System.out.println("res2 : " + picture);
+            
+        m.add(picture, SempicOnto.subject, persons);
+        s.saveModel(m);
+
+            System.out.println("Personne et endroit existent, on peut push");
+        }else{
+            System.out.println("Personne ou endroit existe pas");
+        }
      
     }
-        public void annotatePlace(){
+    
+    
+    //-----------------------------------------------------------------------------\\
+    
+    
+    //Process pour annoter une photo avec une location
+    public void annotatePlace(){
         
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String idPicture = request.getParameter("idPicture");
@@ -145,6 +174,28 @@ public class CreateAnnotation implements Serializable{
         System.out.println("--"+photoExiste);
         
         if(placeExiste && photoExiste){
+            BasicSempicRDFStore s = new BasicSempicRDFStore();
+            
+            Model m = ModelFactory.createDefaultModel();
+            QueryExecution qe = cnx.query("SELECT DISTINCT ?place WHERE {?place a <https://example.com/ontology#Place>; <https://example.com/ontology#placeName> '"+place + "'}");
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution qs = rs.next();
+                System.out.println("Query: "+qs.getResource("place"));
+                places = qs.getResource("place");
+            };
+        
+            QueryExecution qp = cnx.query("SELECT DISTINCT ?picture WHERE {?picture ?p ?o. FILTER(?picture = <http://miashs.univ-grenoble-alpes.fr/photo/"+idPicture + ">)}");
+            ResultSet rp = qp.execSelect();
+            while (rp.hasNext()) {
+                QuerySolution qpp = rp.next();
+                System.out.println("Query: "+qpp.getResource("picture"));
+                picture = qpp.getResource("picture");
+            };
+        
+        m.add(picture, SempicOnto.where, places);
+        s.saveModel(m);
+
             System.out.println("Personne et endroit existent, on peut push");
         }else{
             System.out.println("Personne ou endroit existe pas");

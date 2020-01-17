@@ -22,7 +22,7 @@ and open the template in the editor.
                     <f:passThroughAttribute name="accept" value="image/png" />
                 </h:inputFile>  
 
-                <h:commandButton value="Créer" action="#{createPicture.create()}">
+                <h:commandButton value="Créer" action="#{createPicture.create(sessionTools.connectedUser)}">
                     <f:param name="idAlbum" value="#{param.idAlbum}" />
                 </h:commandButton>
 

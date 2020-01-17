@@ -28,12 +28,11 @@ and open the template in the editor.
                 <h:outputText value="#{param.idPicture}"/>
             </td>
             <td>
-                <h:selectOneMenu value="#{selectedPerson}">
-                <f:selectItems value="#{createAnnotation.persons}" />
-                </h:selectOneMenu>  
+                <label for="person">Person</label>
+                <input type="text" name="person"/>   
             </td>
             <td>
-                <h:commandButton value="Annotate Subject" action="#{createAnnotation.annotateSubject(selectedPerson)}">
+                <h:commandButton value="Annotate Subject" action="#{createAnnotation.annotateSubject()}">
                 <f:param name="idPicture" value="#{param.idPicture}" />
                 </h:commandButton>
             </td>
