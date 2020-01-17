@@ -145,11 +145,40 @@ public class CreateAnnotation {
         boolean photoExiste = cnx.queryAsk("ASK {?picture a <https://example.com/ontology#Picture>. FILTER (?picture = <http://miashs.univ-grenoble-alpes.fr/photo/"+idPicture+">)}");
 
         
+        System.out.println("--"+personneExiste);
+        System.out.println("--"+photoExiste);
+        
         if(personneExiste && photoExiste){
             System.out.println("Personneet photo existent, on peut push");
         }else{
             System.out.println("Personne ou photo existe pas");
         }
         
+    }
+    
+    
+    public void annotatePlace(){
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String idPicture = request.getParameter("idPicture");
+        String place = request.getParameter("place");
+       
+        System.out.println("ici 1? " + idPicture);  
+        System.out.println("ici 2? " + place);
+        
+        
+        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        boolean placeExiste = cnx.queryAsk("ASK {?place a <https://example.com/ontology#Place>; <https://example.com/ontology#placeName> '"+place + "'}");
+        boolean photoExiste = cnx.queryAsk("ASK {?picture a <https://example.com/ontology#Picture>. FILTER (?picture = <http://miashs.univ-grenoble-alpes.fr/photo/"+idPicture+">)}");
+
+        System.out.println("--"+placeExiste);
+        System.out.println("--"+photoExiste);
+        
+        if(placeExiste && photoExiste){
+            System.out.println("Personne et endroit existent, on peut push");
+        }else{
+            System.out.println("Personne ou endroit existe pas");
+        }
     }
 }
