@@ -1,4 +1,4 @@
-/*
+PREFIX dbo: <http://dbpedia.org/ontology/>/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -332,4 +332,322 @@ public class Research {
         return pictures;
     }
     
+    
+    
+    //Recherche photos prises dans un festival
+    public void searchWhereFestival(){
+        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+       
+        QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
+            "WHERE {\n" +
+            "  ?picture a ex:Picture;\n" +
+            "           ex:event ?event.\n" +
+            "\n" +
+            "  ?event a ex:Festival\n" +
+            "}");
+        
+        ResultSet rs = qe.execSelect();
+        while (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            System.out.println(qs.getResource("?picture"));
+            pictures.add(qs.getResource("?picture"));
+        }
+        cnx.close();
+    }
+    
+    //Recherche photos prises dans un festival
+    public void searchAtCulturalEvent(){
+        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+       
+        QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
+            "WHERE {\n" +
+            "  ?picture a ex:Picture;\n" +
+            "           ex:event ?event.\n" +
+            "\n" +
+            "  ?event a ?eventType.\n" +
+            "  ?eventType rdfs:subClassOf ex:Cultural_Event.\n" +
+            "}");
+        
+        ResultSet rs = qe.execSelect();
+        while (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            System.out.println(qs.getResource("?picture"));
+            pictures.add(qs.getResource("?picture"));
+        }
+        cnx.close();
+    }
+    
+    
+     //Recherche photos prises dans un festival avec un artiste qui joue
+    public void searchWhereFestivalWithArtist(){
+        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String nameProperty = request.getParameter("artist");
+        
+        String name = nameProperty.substring(nameProperty.indexOf(" ")+1);
+        String firstname = nameProperty.substring(0,nameProperty.indexOf(" "));
+        
+        
+        String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+       
+        QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
+            "WHERE {\n" +
+            "  ?picture a ex:Picture;\n" +
+            "           ex:event ?event.\n" +
+            "\n" +
+            "  {?event a ex:Festival}UNION{?event a ex:Music_Event}\n" +
+            "  ?event ex:featuredArtist ?artist." +
+            "?artist ex:firstName ?artistFirstName.\n" +
+            "?artist ex:lastName ?artistLastName.\n" +
+            "FILTER(?artistFirstName = '"+firstname+"')\n" +
+            "FILTER(?artistLastName = '"+name+"') "
+                + "}");
+
+        ResultSet rs = qe.execSelect();
+        while (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            System.out.println(qs.getResource("?picture"));
+            pictures.add(qs.getResource("?picture"));
+        }
+        cnx.close();
+    }
+    
+    
+    
+    public void searchWithPeopleWorkingAtCompany(){
+        
+        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String companyName = request.getParameter("company");
+        
+        String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+       
+        QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
+            "WHERE {\n" +
+            "  ?picture a ex:Picture;\n" +
+            "      ex:subject ?person.\n" +
+            "\n" +
+            "  ?person <https://example.com/ontology#job> ?job.\n" +
+            "\n" +
+            "  ?job ex:company ?company.\n"
+                + "?company ex:companyName '" +companyName + "'}");
+
+        ResultSet rs = qe.execSelect();
+        while (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            System.out.println(qs.getResource("?picture"));
+            pictures.add(qs.getResource("?picture"));
+        }
+        cnx.close();
+    }
+    
+    
+    
+
+public void searchWhereCompanyLocation(){
+        
+        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+        
+        String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+       
+        QueryExecution qe = cnx.query(pref+"\n" +
+            "SELECT DISTINCT ?picture\n" +
+            "WHERE {\n" +
+            "    ?picture a ex:Picture;\n" +
+            "         ex:subject ?person;\n" +
+            "         ex:subject ?colleague;\n" +
+            "           ex:where ?officeLocation.\n" +
+            "\n" +
+            "      ?person <https://example.com/ontology#job> ?personJob.\n" +
+            "     ?colleague <https://example.com/ontology#job> ?colleagueJob.\n" +
+            "      ?personJob ex:colleague ?colleague.\n" +
+            "\n" +
+            "      ?personJob ex:company ?personCompany.\n" +
+            "      ?personCompany ex:officeLocation ?officeLocation.\n" +
+            "}\n" +
+            "");
+
+        ResultSet rs = qe.execSelect();
+        while (rs.hasNext()) {
+            QuerySolution qs = rs.next();
+            System.out.println(qs.getResource("?picture"));
+            pictures.add(qs.getResource("?picture"));
+        }
+        cnx.close();
+    }
+    
+
+
+
+    public void searchWhereColleaguesAtCompanyLocation(){
+
+            RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+
+            String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+
+            QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
+                "WHERE {\n" +
+                "   ?picture a ex:Picture;\n" +
+                "            ex:where ?officeLocation.\n" +
+                "\n" +
+                "   ?company a ex:Company;\n" +
+                "            ex:officeLocation ?officeLocation.\n" +
+                "}");
+
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution qs = rs.next();
+                System.out.println(qs.getResource("?picture"));
+                pictures.add(qs.getResource("?picture"));
+            }
+            cnx.close();
+        }
+    
+    
+     public void searchSelfies(){
+
+            RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+
+            String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+
+            QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture (count( ?subject) as ?count)\n" +
+                "WHERE {\n" +
+                "  ?picture a ex:Picture;\n" +
+                "           ex:subject ?subject.\n" +
+                "}\n" +
+                "GROUP BY ?picture");
+
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution qs = rs.next();
+                System.out.println(qs.getResource("?picture"));
+                pictures.add(qs.getResource("?picture"));
+            }
+            cnx.close();
+        }
+        
+        public void searchWhereCountry(){
+
+            RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String country = request.getParameter("country");
+            
+            
+            String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n");
+
+            QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture WHERE {\n" +
+                "  \n" +
+                "  ?picture ex:where ?place;\n" +
+                "           a ex:Picture.\n" +
+                "  \n" +
+                "  ?place a ?placeType.\n" +
+                "  {?placeType rdfs:subClassOf ex:Place}UNION{?place a ex:Place}\n" +
+                "  \n" +
+                "  \n" +
+                "  {     \n" +
+                "    ?place ex:city ?city.\n" +
+                "    ?city ex:region ?region.\n" +
+                "    ?region ex:country ?country.\n" +
+                "  }\n" +
+                "  UNION\n" +
+                "  {\n" +
+                "    ?place ex:region ?region.\n" +
+                "    ?region ex:country ?country.\n" +
+                "  }\n" +
+                "  UNION\n" +
+                "  {\n" +
+                "    ?place ex:country ?country \n" +
+                "  }\n" +
+                "  \n" +
+                "  ?country ex:placeName '"+country+"'.\n" +
+                "  \n" +
+                "}");
+
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution qs = rs.next();
+                System.out.println(qs.getResource("?picture"));
+                pictures.add(qs.getResource("?picture"));
+            }
+            cnx.close();
+        }
+        
+        public void searchWhereCountrySpeaksLanguage(){
+
+            RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
+
+            HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+            String language = request.getParameter("language");
+            
+            String pref = ("PREFIX ex: <https://example.com/ontology#>\n"+
+                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX dbo: <http://dbpedia.org/ontology/>");
+
+            QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
+                    "WHERE {\n" +
+                    "	?picture a ex:Picture;\n" +
+                    "	    ex:where ?place.\n" +
+                    
+                    "	?place a ?placeType.\n" +
+                    "  	{?placeType rdfs:subClassOf ex:Place}UNION{?place a ex:Place}\n" +
+
+                    "	{\n" +
+                    "		?place ex:city ?city.\n" +
+                    "		?city ex:region ?region.\n" +
+                    "		?region ex:country ?country.\n" +
+                    "	}UNION{\n" +
+                    "    	?place ex:region ?region.\n" +
+                    "    	?region ex:country ?country.\n" +
+                    "	}UNION{\n" +
+                    "    	#The place is a region\n" +
+                    "    	?place ex:country ?country\n" +
+                    "	}\n" +
+                    "  \n" +
+                    "  	?country ex:placeName ?countryName.\n" +
+                    "  \n" +
+                    "    SERVICE <http://dbpedia.org/sparql> {\n" +
+                    "     ?dbCountry a <http://schema.org/Country>.\n" +
+                    "     ?dbCountry rdfs:label ?dbCountryName.\n" +
+                    "     FILTER(?dbCountryName = ?countryName).\n" +
+                    "     \n" +
+                    "     ?dbCountry dbo:language ?dbLanguage.\n" +
+                    "     ?dbLanguage rdfs:label ?dbLanguageLabel.\n" +
+                    "     FILTER(STR(?dbLanguageLabel) = '"+language+"')\n" +
+                    "   }\n" +
+                    "}");
+
+            ResultSet rs = qe.execSelect();
+            while (rs.hasNext()) {
+                QuerySolution qs = rs.next();
+                System.out.println(qs.getResource("?picture"));
+                pictures.add(qs.getResource("?picture"));
+            }
+            cnx.close();
+        }
+        
+        
+        
+    
 }
+    
+    
+   
+
+
+
+

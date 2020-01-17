@@ -786,6 +786,8 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Bob_Dylan">
         <rdf:type rdf:resource="https://example.com/ontology#Male"/>
+        <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bob</firstName>
+        <lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dylan</lastName>
     </owl:NamedIndividual>
     
 
