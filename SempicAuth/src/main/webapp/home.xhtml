@@ -8,7 +8,7 @@
         <f:viewAction  action="home"/>
     </f:metadata>
     <h:head>
-        <title>Welcome page</title>
+        <title>Page d'Accueil</title>
     </h:head>
     <h:body>
         
@@ -18,18 +18,20 @@
             }
         </style>
        
-        <p>Welcome to sempic application</p>
+        <h1>Bienvenue sur Sempic Application</h1>
         
-        <p>Avalaible actions:</p>
+        <p>Actions disponibles:</p>
         <ul>
-            <li><h:button outcome="create-user" value="Create a user"/></li>
-            <li><h:button outcome="list-users" value="List of users"/></li>
-            <li><h:button outcome="test-rdf" value="Test RDF"/></li>
+            <c:if test="#{sessionTools.admin}">
+                <li><h:button outcome="create-user" value="Créer un Utilisateur"/></li>
+                <li><h:button outcome="list-users" value="Liste des Utilisateurs"/></li>
+            </c:if>
+            <li><h:button outcome="research" value="Recherche"/></li>
             <h:form>
-                <h:commandButton action="#{sessionTools.logout}" value="Logout"/>
+                <h:commandButton action="#{sessionTools.logout}" value="Déconnexion"/>
             </h:form>
             <hr></hr>
-            <h:button outcome="create-album" value="Create an album"/>
+            <h:button outcome="create-album" value="Créer un album"/>
             
             <br/>
             <span>Mes albums : </span>
@@ -45,7 +47,7 @@
                     <tr>
                         <td><h:outputText value="#{album.id}"/></td>
                         <td><h:outputText value="#{album.title}"/></td>
-                        <td>-1</td>
+                        <td><h:outputText value="#{listAlbums.getAlbumLength(album)}"/></td>
                         <td>
                             <h:form> 
                                 <h:commandButton action="#{home.goToAlbumPage(album.id)}" value="Afficher"/>

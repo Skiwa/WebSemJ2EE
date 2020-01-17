@@ -10,7 +10,7 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
     <head>
-        <title>Create annotation</title>
+        <title>Création d'une photo</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
@@ -25,8 +25,6 @@ and open the template in the editor.
                 <h:commandButton value="Créer" action="#{createPicture.create(sessionTools.connectedUser)}">
                     <f:param name="idAlbum" value="#{param.idAlbum}" />
                 </h:commandButton>
-
-                <h:outputText value="ici : #{param.idAlbum}"/>
         </h:form>
     </body>
 </html>

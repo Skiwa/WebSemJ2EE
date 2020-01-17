@@ -54,7 +54,7 @@
         <navigation-case>
             <from-action>#{createUser.create()}</from-action>
             <from-outcome>success</from-outcome>
-            <to-view-id>/admin/list-users.xhtml</to-view-id>
+            <to-view-id>/home.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -123,6 +123,16 @@
         <navigation-case>
             <from-outcome>back-home</from-outcome>
             <to-view-id>/home.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <description>Research</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>research</from-outcome>
+            <to-view-id>/research.xhtml</to-view-id>
             <redirect/>  
         </navigation-case>
     </navigation-rule>
