@@ -45,55 +45,21 @@ import org.apache.jena.rdfconnection.RDFConnectionFactory;
  *
  * @author Jerome David <jerome.david@univ-grenoble-alpes.fr>
  */
-@Named("createAnnotation")
+@Named("createAnnotationPlaces")
 @ViewScoped
-public class CreateAnnotation implements Serializable{
+public class CreateAnnotationPlaces implements Serializable{
     
     @Inject
     private SempicPictureFacade pictureDao;
 
-   public CreateAnnotation() {
+   public CreateAnnotationPlaces() {
     }
     
-    public String createAnnotation(SempicUser currentUser) throws SempicModelException {
-
-        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String idAlbum = params.get("idAlbum"); 
-        String idPicture = params.get("idPicture");        
-        BasicSempicRDFStore s = new BasicSempicRDFStore();
-        Model m = ModelFactory.createDefaultModel();
-
-        System.out.println("CURRENT USER" + currentUser.getId());
-        //Crée une photo
-        //(id picture, id album, id owner)
-        Resource pRes = s.createPicture(Long.parseLong(idPicture), Long.parseLong(idAlbum), currentUser.getId());          
-        //Lie Manuel à la photo
-        m.add(pRes, SempicOnto.subject, SempicOnto.Manuel_Atencia);
-        
-        //enregistre
-        s.saveModel(m);
-         return "show-album?faces-redirect=true&idAlbum="+idAlbum;
-    }
-
-    public List<String> getPictures() {
+        public List<String> getPlaces() {
         ArrayList<String> list=new ArrayList<String>();
         RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
         
-        QueryExecution qe = cnx.query("SELECT DISTINCT ?s WHERE {?s a <https://example.com/ontology#Picture>}");
-        ResultSet rs = qe.execSelect();
-        while (rs.hasNext()) {
-             QuerySolution qs = rs.next();
-             //System.out.println(qs.getResource("s"));
-             list.add(qs.getResource("s").toString());
-         }
-        cnx.close();
-        return list;
-    }
-    public List<String> getPersons() {
-        ArrayList<String> list=new ArrayList<String>();
-        RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
-        
-        QueryExecution qe = cnx.query("SELECT DISTINCT ?s WHERE {?s a <https://example.com/ontology#Person>}");
+        QueryExecution qe = cnx.query("SELECT DISTINCT ?s WHERE {?s a <https://example.com/ontology#Place>}");
         ResultSet rs = qe.execSelect();
         while (rs.hasNext()) {
             QuerySolution qs = rs.next();
@@ -104,23 +70,14 @@ public class CreateAnnotation implements Serializable{
         cnx.close();
         return list;
     }
-    public void displayChiass(String selectedPicture, String selectedPerson)throws SempicModelException {
 
-       
-       System.out.println("Selected person: " + selectedPerson);
-              System.out.println("Selected picture: " + selectedPicture);
-
-       
-        
-    }
-    
-    public String annotateSubject(String selectedPerson){
+    public String annotatePlaces(String selectedPlace){
         
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         String idPicture = request.getParameter("idPicture");
        
         System.out.println("ici 1? " + idPicture);  
-        System.out.println("ici 2? " + selectedPerson);
+        System.out.println("ici 2? " + selectedPlace);
 
  
         RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);

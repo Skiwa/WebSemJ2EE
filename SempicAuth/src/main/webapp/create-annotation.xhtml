@@ -15,17 +15,52 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
+        <table>
+            <tr>
+                <th>Photo</th>
+                <th>ex:subject</th>
+                <th>Annotate</th>
+            </tr>
+        
+        <h:form id="formBody">
             
-        <h:form>
-            
-                <label for="idPicture">Id de la photo</label>
-                <input type="text" name="idPicture"/>
-            
-                <label for="person">Personne (Prenom Nom)</label>
-                <input type="text" name="person"/>
-                
-                <h:commandButton value="Test Annottttsdzsdds" action="#{createAnnotation.annotateSubject()}"/>
+            <td>
+                <h:outputText value="#{param.idPicture}"/>
+            </td>
+            <td>
+                <h:selectOneMenu value="#{selectedPerson}">
+                <f:selectItems value="#{createAnnotation.persons}" />
+                </h:selectOneMenu>  
+            </td>
+            <td>
+                <h:commandButton value="Annotate Subject" action="#{createAnnotation.annotateSubject(selectedPerson)}">
+                <f:param name="idPicture" value="#{param.idPicture}" />
+                </h:commandButton>
+            </td>
          
         </h:form>
+        </table>
+        <table>
+            <tr>
+                <th>Photo</th>
+                <th>ex:subject</th>
+                <th>Annotate</th>
+            </tr>
+        <h:form id="formHeader">
+            <td>
+                <h:outputText value="#{param.idPicture}"/>
+            </td>
+            <td>
+                <h:selectOneMenu value="#{selectedPlace}">
+                    <f:selectItems value="#{createAnnotationPlaces.places}" />
+                </h:selectOneMenu>  
+            </td>
+            <td>
+                <h:commandButton value="Annotate Place" action="#{createAnnotationPlaces.annotatePlaces(selectedPlace)}">
+                <f:param name="idPicture" value="#{param.idPicture}" />
+                </h:commandButton>
+            </td>
+        </h:form>
+        </table>
     </body>
 </html>
