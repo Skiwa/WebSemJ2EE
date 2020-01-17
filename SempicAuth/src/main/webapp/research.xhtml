@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Research Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <h1 style="text-align:center">Welcome to Search page</h1>
+        <h:form>
+            <span>Photos avec au moins 1 personne </span><h:commandButton action="#{research.searchBy1orMorePerson}" value="GO"/><br></br>
+            <span>Photos avec aucunes personnes </span><h:commandButton action="#{research.searchWithNobody}" value="GO"/><br></br>
+            <span>Photos avec : (Prénom Nom) </span><input type="text" name="nameProperty"/><h:commandButton action="#{research.searchWithX}" value="GO"/><br></br>
+            <span>Photos avec X et Y </span><h:commandButton action="#{research.searchWithXandY}" value="GO"/><br></br>
+            <span>Photos avec des animaux </span><h:commandButton action="#{research.searchWithAnimals}" value="GO"/><br></br>
+            <span>Photos avec l'animal de : (Prénom Nom) </span><input type="text" name="nameUsersPet"/><h:commandButton action="#{research.searchWithAnimalsofX}" value="GO"/><br></br>
+            <span>Photos avec des enfants </span><h:commandButton action="#{research.searchWithChilds}" value="GO"/><br></br>
+            <span>Photos avec seulement des adultes </span><h:commandButton action="#{research.searchWithOnlyAdults}" value="GO"/><br></br>
+            <span>Photos avec seulement des gens amis </span><h:commandButton action="#{research.searchWithOnlyFriends}" value="GO"/><br></br>
+            <span>Photos avec seulement des amis de X </span><h:commandButton action="#{research.searchWithOnlyFriendsofX}" value="GO"/><br></br>
+        </h:form><br></br>
+        
+        
+        <div style="text-align:center">
+            <!--
+                Future div contenant les images obtenues
+            -->
+            <c:forEach var="picture" items="#{research.result}">
+                <h:outputText value="#{picture.URI}"/><br></br>
+            </c:forEach>
+            <span>Nombre de résultats : #{research.result.size()} </span>
+            
+        </div><br></br>
+        
+        <h:button outcome="back-home" value="Retour"/>
+    </h:body>
+</html>

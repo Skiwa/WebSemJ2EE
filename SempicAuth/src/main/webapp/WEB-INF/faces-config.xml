@@ -126,6 +126,16 @@
             <redirect/>  
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <description>Research</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>research</from-outcome>
+            <to-view-id>/research.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+    </navigation-rule>
 
      <navigation-rule>
         <description>Delete user</description>
