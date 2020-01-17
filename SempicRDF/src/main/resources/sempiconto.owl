@@ -297,26 +297,6 @@
 
     
 
-<!-- https://example.com/ontology#albumId -->
-
-    <owl:DatatypeProperty rdf:about="https://example.com/ontology#albumId">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label>in album</rdfs:label>
-    </owl:DatatypeProperty>
-    
-
-
-    <!-- https://example.com/ontology#ownerId -->
-
-    <owl:DatatypeProperty rdf:about="https://example.com/ontology#ownerId">
-        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:label>has owner</rdfs:label>
-    </owl:DatatypeProperty>
-    
-
-
 
     <!-- https://example.com/ontology#FN -->
 
@@ -343,12 +323,28 @@
     
 
 
+    <!-- https://example.com/ontology#albumId -->
+
+    <owl:DatatypeProperty rdf:about="https://example.com/ontology#albumId">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label>in album</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- https://example.com/ontology#birthday -->
 
     <owl:DatatypeProperty rdf:about="https://example.com/ontology#birthday">
         <rdfs:domain rdf:resource="https://example.com/ontology#Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.com/ontology#companyName -->
+
+    <owl:DatatypeProperty rdf:about="https://example.com/ontology#companyName"/>
     
 
 
@@ -375,6 +371,16 @@
     <owl:DatatypeProperty rdf:about="https://example.com/ontology#lastName">
         <rdfs:domain rdf:resource="https://example.com/ontology#Person"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://example.com/ontology#ownerId -->
+
+    <owl:DatatypeProperty rdf:about="https://example.com/ontology#ownerId">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:label>has owner</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -806,6 +812,8 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Bob_Dylan">
         <rdf:type rdf:resource="https://example.com/ontology#Male"/>
+        <firstName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bob</firstName>
+        <lastName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Dylan</lastName>
     </owl:NamedIndividual>
     
 
@@ -815,7 +823,7 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Catalonia">
         <rdf:type rdf:resource="https://example.com/ontology#Region"/>
         <country rdf:resource="https://example.com/ontology#Spain"/>
-        <placeName xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Catalonia</placeName>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Catalonia</placeName>
     </owl:NamedIndividual>
     
 
@@ -905,7 +913,7 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#France">
         <rdf:type rdf:resource="https://example.com/ontology#Country"/>
-        <placeName xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">France</placeName>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">France</placeName>
     </owl:NamedIndividual>
     
 
@@ -1257,7 +1265,8 @@
 
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Spain">
         <rdf:type rdf:resource="https://example.com/ontology#Country"/>
-        <placeName xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Spain</placeName>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Espagne</placeName>
+        <placeName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Spain</placeName>
     </owl:NamedIndividual>
     
 
@@ -1267,6 +1276,7 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#Thales">
         <rdf:type rdf:resource="https://example.com/ontology#Company"/>
         <officeLocation rdf:resource="https://example.com/ontology#OfficeThales"/>
+        <companyName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Thalès</companyName>
     </owl:NamedIndividual>
     
 
@@ -1285,6 +1295,7 @@
     <owl:NamedIndividual rdf:about="https://example.com/ontology#UGA">
         <rdf:type rdf:resource="https://example.com/ontology#Company"/>
         <officeLocation rdf:resource="https://example.com/ontology#OfficeUGA"/>
+        <companyName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">UGA</companyName>
     </owl:NamedIndividual>
     
 
