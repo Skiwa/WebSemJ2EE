@@ -10,12 +10,12 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Research Page</title>
+        <title>Page de Recherche</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
         
-        <h1 style="text-align:center">Welcome to Search page</h1>
+        <h1 style="text-align:center">Bienvenue sur la page de Recherche</h1>
         <h:form>
             <span>Photos avec au moins 1 personne </span><h:commandButton action="#{research.searchBy1orMorePerson}" value="GO"/><br></br>
             <span>Photos avec aucunes personnes </span><h:commandButton action="#{research.searchWithNobody}" value="GO"/><br></br>
@@ -31,13 +31,12 @@ and open the template in the editor.
         
         
         <div style="text-align:center">
-            <!--
-                Future div contenant les images obtenues
-            -->
+            
+            <h2>Nombre de résultats : #{research.result.size()} </h2><br></br>
+            
             <c:forEach var="picture" items="#{research.result}">
                 <h:outputText value="#{picture.URI}"/><br></br>
             </c:forEach>
-            <span>Nombre de résultats : #{research.result.size()} </span>
             
         </div><br></br>
         

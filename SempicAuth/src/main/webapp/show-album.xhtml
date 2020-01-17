@@ -14,7 +14,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <h1>Affichage de l'album : <h:outputText value="#{showAlbum.getAlbumById(param.idAlbum)}"/> de <h:outputText value="#{sessionTools.connectedUser.firstname}"/></h1>
+        <h1>Affichage de l'album ID : <h:outputText value="#{param.idAlbum}"/> de <h:outputText value="#{sessionTools.connectedUser.firstname}"/></h1>
         <hr/>
         <table  style="width:50%">
                 <tr>
@@ -40,7 +40,7 @@ and open the template in the editor.
                             <td>
                                 <h:form>
                                     
-                                    <h:commandButton value="AddAnnot" action="#{createAnnotation.createAnnotation(sessionTools.connectedUser)}">
+                                    <h:commandButton value="Ajouter Annotation" action="#{createAnnotation.createAnnotation(sessionTools.connectedUser)}">
                                     <f:param name="userId" value="#{user.id}"/>
                                     <f:param name="idPicture" value="#{picture.id}" /> 
                                     <f:param name="idAlbum" value="#{param.idAlbum}" />

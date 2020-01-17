@@ -32,6 +32,7 @@ public class ListAlbums {
 
     private List<SempicAlbum> dataModel;
     private List<SempicAlbum> albums;
+    private int albumLength =0;
     
     @Inject
     private SempicAlbumFacade albumDao;
@@ -52,6 +53,14 @@ public class ListAlbums {
             dataModel = albumDao.findAlbumsForUser(user.getId());
         }
         return dataModel;
+    }
+    
+    public int getAlbumLength(SempicAlbum album){
+        if(album.getPictures().size() == 0){
+            return 0;
+        }else {
+            return album.getPictures().size();
+        }
     }
     
 }
