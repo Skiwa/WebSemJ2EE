@@ -51,12 +51,11 @@ and open the template in the editor.
                 <h:outputText value="#{param.idPicture}"/>
             </td>
             <td>
-                <h:selectOneMenu value="#{selectedPlace}">
-                    <f:selectItems value="#{createAnnotationPlaces.places}" />
-                </h:selectOneMenu>  
+                <label for="place">Localisation</label>
+                <input type="text" name="place"/>  
             </td>
             <td>
-                <h:commandButton value="Annotate Place" action="#{createAnnotationPlaces.annotatePlaces(selectedPlace)}">
+                <h:commandButton value="Annotate Place" action="#{createAnnotation.annotatePlace()}">
                 <f:param name="idPicture" value="#{param.idPicture}" />
                 </h:commandButton>
             </td>
