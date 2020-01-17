@@ -1,0 +1,480 @@
+@prefix : <https://example.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://example.com/ontology> .
+
+<https://example.com/ontology> rdf:type owl:Ontology ;
+                                owl:versionIRI <https://example.com/ontology> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://example.com/ontology#child
+:child rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf :family ;
+       owl:inverseOf :parent ;
+       rdf:type owl:AsymmetricProperty ;
+       rdfs:domain :Person ;
+       rdfs:range :Person .
+
+
+###  https://example.com/ontology#city
+:city rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :location .
+
+
+###  https://example.com/ontology#colleague
+:colleague rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :relation ;
+           rdfs:domain :Job ;
+           rdfs:range :Person .
+
+
+###  https://example.com/ontology#company
+:company rdf:type owl:ObjectProperty ;
+         rdfs:domain :Job ;
+         rdfs:range :Company .
+
+
+###  https://example.com/ontology#country
+:country rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :location ;
+         rdfs:domain :Region ;
+         rdfs:range :Country .
+
+
+###  https://example.com/ontology#creator
+:creator rdf:type owl:ObjectProperty ;
+         rdfs:domain :Picture ;
+         rdfs:range :Person .
+
+
+###  https://example.com/ontology#event
+:event rdf:type owl:ObjectProperty ;
+       rdfs:domain :Picture ;
+       rdfs:range :Event .
+
+
+###  https://example.com/ontology#family
+:family rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relation ;
+        rdf:type owl:SymmetricProperty ;
+        rdfs:domain :Person ;
+        rdfs:range :Person .
+
+
+###  https://example.com/ontology#featuredArtist
+:featuredArtist rdf:type owl:ObjectProperty ;
+                rdfs:domain :Cultural_Event ;
+                rdfs:range :Person .
+
+
+###  https://example.com/ontology#friend
+:friend rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :relation ;
+        rdf:type owl:SymmetricProperty ;
+        rdfs:domain :Person ;
+        rdfs:range :Person .
+
+
+###  https://example.com/ontology#husband
+:husband rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :family ;
+         owl:inverseOf :wife ;
+         rdfs:domain :Female ;
+         rdfs:range :Male .
+
+
+###  https://example.com/ontology#job
+:job rdf:type owl:ObjectProperty ;
+     rdfs:domain :Person ;
+     rdfs:range :Job .
+
+
+###  https://example.com/ontology#livesAt
+:livesAt rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :location ;
+         rdfs:domain :Person ;
+         rdfs:range :Domicile .
+
+
+###  https://example.com/ontology#location
+:location rdf:type owl:ObjectProperty ;
+          rdfs:range :Place .
+
+
+###  https://example.com/ontology#locationEvent
+:locationEvent rdf:type owl:ObjectProperty ;
+               rdfs:domain :Place ;
+               rdfs:range :Event .
+
+
+###  https://example.com/ontology#manufacturedBy
+:manufacturedBy rdf:type owl:ObjectProperty ;
+                rdfs:domain :Device ;
+                rdfs:range :Company .
+
+
+###  https://example.com/ontology#officeLocation
+:officeLocation rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :location ;
+                rdfs:domain :Company ;
+                rdfs:range :Office .
+
+
+###  https://example.com/ontology#owner
+:owner rdf:type owl:ObjectProperty ;
+       owl:inverseOf :pet .
+
+
+###  https://example.com/ontology#parent
+:parent rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :family ;
+        rdf:type owl:AsymmetricProperty ;
+        rdfs:domain :Person ;
+        rdfs:range :Person .
+
+
+###  https://example.com/ontology#pet
+:pet rdf:type owl:ObjectProperty ;
+     rdfs:domain :Person ;
+     rdfs:range :Animal .
+
+
+###  https://example.com/ontology#region
+:region rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf :location ;
+        rdfs:domain :City ;
+        rdfs:range :Region .
+
+
+###  https://example.com/ontology#relation
+:relation rdf:type owl:ObjectProperty .
+
+
+###  https://example.com/ontology#sibling
+:sibling rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :family ;
+         rdf:type owl:SymmetricProperty ;
+         rdfs:domain :Person ;
+         rdfs:range :Person .
+
+
+###  https://example.com/ontology#subject
+:subject rdf:type owl:ObjectProperty ;
+         rdfs:domain :Picture ;
+         rdfs:range :Person .
+
+
+###  https://example.com/ontology#takenOn
+:takenOn rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :Picture ;
+         rdfs:range :Device .
+
+
+###  https://example.com/ontology#what
+:what rdf:type owl:ObjectProperty ;
+      rdfs:domain :Picture ;
+      rdfs:range owl:Thing .
+
+
+###  https://example.com/ontology#where
+:where rdf:type owl:ObjectProperty ;
+       rdfs:domain :Picture ;
+       rdfs:range :Place .
+
+
+###  https://example.com/ontology#wife
+:wife rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :family .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://example.com/ontology#FN
+:FN rdf:type owl:DatatypeProperty ;
+    owl:equivalentProperty :firstName .
+
+
+###  https://example.com/ontology#LN
+:LN rdf:type owl:DatatypeProperty ;
+    owl:equivalentProperty :lastName .
+
+
+###  https://example.com/ontology#address
+:address rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Place ;
+         rdfs:range xsd:string .
+
+
+###  https://example.com/ontology#albumId
+:albumId rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:label "in album" .
+
+
+###  https://example.com/ontology#birthday
+:birthday rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Person ;
+          rdfs:range xsd:dateTime .
+
+
+###  https://example.com/ontology#companyName
+:companyName rdf:type owl:DatatypeProperty .
+
+
+###  https://example.com/ontology#eventName
+:eventName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Event ;
+           rdfs:range xsd:string .
+
+
+###  https://example.com/ontology#firstName
+:firstName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person ;
+           rdfs:range xsd:string .
+
+
+###  https://example.com/ontology#lastName
+:lastName rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Person ;
+          rdfs:range xsd:string .
+
+
+###  https://example.com/ontology#ownerId
+:ownerId rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdf:type owl:FunctionalProperty ;
+         rdfs:label "has owner" .
+
+
+###  https://example.com/ontology#placeName
+:placeName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Place ;
+           rdfs:range xsd:string .
+
+
+###  https://example.com/ontology#title
+:title rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Picture ;
+       rdfs:range xsd:string .
+
+
+###  https://example.com/ontology#when
+:when rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Picture ;
+      rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://example.com/ontology#Animal
+:Animal rdf:type owl:Class ;
+        rdfs:subClassOf :Nature .
+
+
+###  https://example.com/ontology#Artist
+:Artist rdf:type owl:Class ;
+        rdfs:subClassOf :Job .
+
+
+###  https://example.com/ontology#Beach
+:Beach rdf:type owl:Class ;
+       rdfs:subClassOf :Landscape .
+
+
+###  https://example.com/ontology#Camera
+:Camera rdf:type owl:Class ;
+        rdfs:subClassOf :Device .
+
+
+###  https://example.com/ontology#Cat
+:Cat rdf:type owl:Class ;
+     rdfs:subClassOf :Animal .
+
+
+###  https://example.com/ontology#City
+:City rdf:type owl:Class ;
+      rdfs:subClassOf :Place .
+
+
+###  https://example.com/ontology#Company
+:Company rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Country
+:Country rdf:type owl:Class ;
+         rdfs:subClassOf :Place .
+
+
+###  https://example.com/ontology#Cow
+:Cow rdf:type owl:Class ;
+     rdfs:subClassOf :Animal .
+
+
+###  https://example.com/ontology#Cultural_Event
+:Cultural_Event rdf:type owl:Class ;
+                rdfs:subClassOf :Event .
+
+
+###  https://example.com/ontology#Developer
+:Developer rdf:type owl:Class ;
+           rdfs:subClassOf :Job .
+
+
+###  https://example.com/ontology#Device
+:Device rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Dog
+:Dog rdf:type owl:Class ;
+     rdfs:subClassOf :Animal .
+
+
+###  https://example.com/ontology#Domicile
+:Domicile rdf:type owl:Class ;
+          rdfs:subClassOf :Place .
+
+
+###  https://example.com/ontology#Event
+:Event rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Exposition
+:Exposition rdf:type owl:Class ;
+            rdfs:subClassOf :Cultural_Event .
+
+
+###  https://example.com/ontology#Farewell
+:Farewell rdf:type owl:Class ;
+          rdfs:subClassOf :Party .
+
+
+###  https://example.com/ontology#Female
+:Female rdf:type owl:Class ;
+        rdfs:subClassOf :Person .
+
+
+###  https://example.com/ontology#Festival
+:Festival rdf:type owl:Class ;
+          rdfs:subClassOf :Cultural_Event .
+
+
+###  https://example.com/ontology#Holiday
+:Holiday rdf:type owl:Class ;
+         rdfs:subClassOf :Event .
+
+
+###  https://example.com/ontology#House_Warming
+:House_Warming rdf:type owl:Class ;
+               rdfs:subClassOf :Party .
+
+
+###  https://example.com/ontology#Human_Resources
+:Human_Resources rdf:type owl:Class ;
+                 rdfs:subClassOf :Job .
+
+
+###  https://example.com/ontology#Job
+:Job rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Landscape
+:Landscape rdf:type owl:Class ;
+           rdfs:subClassOf :Nature .
+
+
+###  https://example.com/ontology#Male
+:Male rdf:type owl:Class ;
+      rdfs:subClassOf :Person .
+
+
+###  https://example.com/ontology#Mountain
+:Mountain rdf:type owl:Class ;
+          rdfs:subClassOf :Landscape .
+
+
+###  https://example.com/ontology#Music_Event
+:Music_Event rdf:type owl:Class ;
+             rdfs:subClassOf :Cultural_Event .
+
+
+###  https://example.com/ontology#Nature
+:Nature rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Office
+:Office rdf:type owl:Class ;
+        rdfs:subClassOf :Place .
+
+
+###  https://example.com/ontology#Painter
+:Painter rdf:type owl:Class ;
+         rdfs:subClassOf :Artist .
+
+
+###  https://example.com/ontology#Party
+:Party rdf:type owl:Class ;
+       rdfs:subClassOf :Event .
+
+
+###  https://example.com/ontology#Person
+:Person rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Phone
+:Phone rdf:type owl:Class ;
+       rdfs:subClassOf :Device .
+
+
+###  https://example.com/ontology#Picture
+:Picture rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Place
+:Place rdf:type owl:Class .
+
+
+###  https://example.com/ontology#Plant
+:Plant rdf:type owl:Class ;
+       rdfs:subClassOf :Nature .
+
+
+###  https://example.com/ontology#Region
+:Region rdf:type owl:Class ;
+        rdfs:subClassOf :Place .
+
+
+###  https://example.com/ontology#Sea
+:Sea rdf:type owl:Class ;
+     rdfs:subClassOf :Landscape .
+
+
+###  https://example.com/ontology#Singer
+:Singer rdf:type owl:Class ;
+        rdfs:subClassOf :Artist .
+
+
+###  https://example.com/ontology#Tablet
+:Tablet rdf:type owl:Class ;
+        rdfs:subClassOf :Device .
+
+
+###  https://example.com/ontology#Teacher
+:Teacher rdf:type owl:Class ;
+         rdfs:subClassOf :Job .
+
+
+###  https://example.com/ontology#Tree
+:Tree rdf:type owl:Class ;
+      rdfs:subClassOf :Plant .

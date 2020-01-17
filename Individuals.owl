@@ -1,0 +1,430 @@
+@prefix : <https://example.com/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://example.com/ontology> .
+
+<https://example.com/ontology> rdf:type owl:Ontology ;
+                                owl:versionIRI <https://example.com/ontology> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://example.com/ontology#Alpes
+:Alpes rdf:type owl:NamedIndividual ,
+                :Mountain ,
+                :Place ;
+       :region :Auvergne_Rhone_Alpes ;
+       :placeName "Alps"^^xsd:string .
+
+
+###  https://example.com/ontology#Arecaceae
+:Arecaceae rdf:type owl:NamedIndividual ,
+                    :Tree .
+
+
+###  https://example.com/ontology#Artemis_Atencia
+:Artemis_Atencia rdf:type owl:NamedIndividual ,
+                          :Female ;
+                 :livesAt :DomicileManuel ;
+                 :parent :Manuel_Atencia ,
+                         :Manuella_Atencia ;
+                 :birthday "2010-01-01T00:00:00"^^xsd:dateTime ;
+                 :firstName "Artemis"^^xsd:string ;
+                 :lastName "Atencia"^^xsd:string .
+
+
+###  https://example.com/ontology#Auvergne_Rhone_Alpes
+:Auvergne_Rhone_Alpes rdf:type owl:NamedIndividual ,
+                               :Region ;
+                      :country :France ;
+                      :placeName "Auvergne-Rhône-Alpes"^^xsd:string .
+
+
+###  https://example.com/ontology#Barcelone
+:Barcelone rdf:type owl:NamedIndividual ,
+                    :City ;
+           :locationEvent :JazzBarcelone2020 ;
+           :region :Catalonia ;
+           :placeName "Barcelona"^^xsd:string .
+
+
+###  https://example.com/ontology#Bob_Dylan
+:Bob_Dylan rdf:type owl:NamedIndividual ,
+                    :Male ;
+           :firstName "Bob"^^xsd:string ;
+           :lastName "Dylan"^^xsd:string .
+
+
+###  https://example.com/ontology#Catalonia
+:Catalonia rdf:type owl:NamedIndividual ,
+                    :Region ;
+           :country :Spain ;
+           :placeName "Catalonia"^^xsd:string .
+
+
+###  https://example.com/ontology#DomicileFatima
+:DomicileFatima rdf:type owl:NamedIndividual ,
+                         :Domicile ;
+                :city :Grenoble ;
+                :address "1 rue de Fatima"^^xsd:string .
+
+
+###  https://example.com/ontology#DomicileJerome
+:DomicileJerome rdf:type owl:NamedIndividual ,
+                         :Domicile ;
+                :city :Grenoble ;
+                :address "1 rue de Jerome"^^xsd:string .
+
+
+###  https://example.com/ontology#DomicileJulien
+:DomicileJulien rdf:type owl:NamedIndividual ,
+                         :Domicile ;
+                :city :Grenoble ;
+                :address "1 rue de Julien"^^xsd:string .
+
+
+###  https://example.com/ontology#DomicileManuel
+:DomicileManuel rdf:type owl:NamedIndividual ,
+                         :Domicile ;
+                :city :Grenoble ;
+                :address "1 calle de Manuel"^^xsd:string .
+
+
+###  https://example.com/ontology#DomicileNicolas
+:DomicileNicolas rdf:type owl:NamedIndividual ,
+                          :Domicile ;
+                 :city :Grenoble ;
+                 :address "1 rue de Nicolas"^^xsd:string .
+
+
+###  https://example.com/ontology#DomicileSadok
+:DomicileSadok rdf:type owl:NamedIndividual ,
+                        :Domicile ;
+               :city :Sassenage ;
+               :address "1 rue de Sadok"^^xsd:string .
+
+
+###  https://example.com/ontology#Fatima_Belounis
+:Fatima_Belounis rdf:type owl:NamedIndividual ,
+                          :Female ;
+                 :job :JobFatima ;
+                 :birthday "1970-01-01T00:00:00"^^xsd:dateTime ;
+                 :firstName "Fatima" ;
+                 :lastName "Belounis" .
+
+
+###  https://example.com/ontology#Felix
+:Felix rdf:type owl:NamedIndividual ,
+                :Cat ;
+       :firstName "Felix"^^xsd:string .
+
+
+###  https://example.com/ontology#France
+:France rdf:type owl:NamedIndividual ,
+                 :Country ;
+        :placeName "France"^^xsd:string .
+
+
+###  https://example.com/ontology#Grenoble
+:Grenoble rdf:type owl:NamedIndividual ,
+                   :City ;
+          :region :Auvergne_Rhone_Alpes ;
+          :placeName "Grenoble"^^xsd:string .
+
+
+###  https://example.com/ontology#HouseWarmingJulien
+:HouseWarmingJulien rdf:type owl:NamedIndividual ,
+                             :House_Warming ;
+                    :title "Crémaillère de Julien" .
+
+
+###  https://example.com/ontology#JazzBarcelone2020
+:JazzBarcelone2020 rdf:type owl:NamedIndividual ,
+                            :Festival ;
+                   :featuredArtist :Bob_Dylan ;
+                   :eventName "Festival de musica Jazz de Barlecona 2020"^^xsd:string .
+
+
+###  https://example.com/ontology#Jerome_David
+:Jerome_David rdf:type owl:NamedIndividual ,
+                       :Male ;
+              :friend :Manuel_Atencia ;
+              :job :JobJerome ;
+              :livesAt :DomicileJerome ;
+              :birthday "1972-01-01T00:00:00"^^xsd:dateTime ;
+              :firstName "Jérôme" ;
+              :lastName "David" .
+
+
+###  https://example.com/ontology#Jerome_Haegman
+:Jerome_Haegman rdf:type owl:NamedIndividual ,
+                         :Male ;
+                :sibling :Julien_Haegman ;
+                :birthday "1997-09-12T00:00:00"^^xsd:dateTime ;
+                :firstName "Jerome"^^xsd:string ;
+                :lastName "Haegman"^^xsd:string .
+
+
+###  https://example.com/ontology#JobFatima
+:JobFatima rdf:type owl:NamedIndividual ,
+                    :Human_Resources ;
+           :colleague :Jerome_David ,
+                      :Manuel_Atencia ;
+           :company :UGA .
+
+
+###  https://example.com/ontology#JobJerome
+:JobJerome rdf:type owl:NamedIndividual ,
+                    :Teacher ;
+           :colleague :Fatima_Belounis ,
+                      :Manuel_Atencia ;
+           :company :UGA .
+
+
+###  https://example.com/ontology#JobManuel
+:JobManuel rdf:type owl:NamedIndividual ,
+                    :Teacher ;
+           :colleague :Fatima_Belounis ,
+                      :Jerome_David ;
+           :company :UGA .
+
+
+###  https://example.com/ontology#JobNicolas
+:JobNicolas rdf:type owl:NamedIndividual ,
+                     :Developer ;
+            :company :Thales .
+
+
+###  https://example.com/ontology#Julien_Haegman
+:Julien_Haegman rdf:type owl:NamedIndividual ,
+                         :Male ;
+                :friend :Nicolas_Gau ,
+                        :Sadok_Ben_Fredj ;
+                :livesAt :DomicileJulien ;
+                :sibling :Jerome_Haegman ;
+                :birthday "1997-12-09T00:00:00"^^xsd:dateTime ;
+                :firstName "Julien"^^xsd:string ;
+                :lastName "Haegman"^^xsd:string .
+
+
+###  https://example.com/ontology#Manuel_Atencia
+:Manuel_Atencia rdf:type owl:NamedIndividual ,
+                         :Male ;
+                :child :Artemis_Atencia ;
+                :friend :Jerome_David ;
+                :job :JobManuel ;
+                :livesAt :DomicileManuel ;
+                :pet :Felix ,
+                     :Rex ;
+                :wife :Manuella_Atencia ;
+                :birthday "1980-01-01T00:00:00"^^xsd:dateTime ;
+                :firstName "Manuel"^^xsd:string ;
+                :lastName "Atencia"^^xsd:string .
+
+
+###  https://example.com/ontology#Manuella_Atencia
+:Manuella_Atencia rdf:type owl:NamedIndividual ,
+                           :Female ;
+                  :child :Artemis_Atencia ;
+                  :husband :Manuel_Atencia ;
+                  :livesAt :DomicileManuel .
+
+
+###  https://example.com/ontology#Mediterranean_Sea
+:Mediterranean_Sea rdf:type owl:NamedIndividual ,
+                            :Place ,
+                            :Sea .
+
+
+###  https://example.com/ontology#NewYearsEve
+:NewYearsEve rdf:type owl:NamedIndividual ,
+                      :Holiday .
+
+
+###  https://example.com/ontology#Nicolas_Gau
+:Nicolas_Gau rdf:type owl:NamedIndividual ,
+                      :Male ;
+             :friend :Julien_Haegman ,
+                     :Sadok_Ben_Fredj ;
+             :job :JobNicolas ;
+             :livesAt :DomicileNicolas ;
+             :where :Barcelone ;
+             :birthday "1996-01-01T00:00:00"^^xsd:dateTime ;
+             :firstName "Nicolas"^^xsd:string ;
+             :lastName "Gau"^^xsd:string .
+
+
+###  https://example.com/ontology#OfficeThales
+:OfficeThales rdf:type owl:NamedIndividual ,
+                       :Office ;
+              :city :Grenoble ;
+              :address "1 rue de Thales"^^xsd:string .
+
+
+###  https://example.com/ontology#OfficeUGA
+:OfficeUGA rdf:type owl:NamedIndividual ,
+                    :Office ;
+           :city :Grenoble ;
+           :address "1 rue de l'UGA"^^xsd:string .
+
+
+###  https://example.com/ontology#PictureAlpes
+:PictureAlpes rdf:type owl:NamedIndividual ,
+                       :Picture ;
+              :creator :Julien_Haegman ;
+              :takenOn :Xiaomi_Pocophone_F1 ;
+              :what :Alpes ;
+              :where :Alpes ;
+              :title "Photo des Alpes"^^xsd:string ;
+              :when "2019-07-01T01:01:01"^^xsd:dateTime .
+
+
+###  https://example.com/ontology#PictureExample
+:PictureExample rdf:type owl:NamedIndividual ,
+                         :Picture ;
+                :creator :Julien_Haegman ;
+                :event :TripBarcelone ;
+                :subject :Jerome_David ,
+                         :Manuel_Atencia ;
+                :takenOn :Xiaomi_Pocophone_F1 ;
+                :what :Arecaceae ,
+                      :Mediterranean_Sea ;
+                :where :Sant_Sebastia ;
+                :title "Manu et Jerome en vacances à Barcelone"^^xsd:string ;
+                :when "2017-07-01T00:00:00"^^xsd:dateTime .
+
+
+###  https://example.com/ontology#PictureFamilyManuel
+:PictureFamilyManuel rdf:type owl:NamedIndividual ,
+                              :Picture ;
+                     :creator :Manuel_Atencia ;
+                     :subject :Artemis_Atencia ,
+                              :Manuel_Atencia ,
+                              :Manuella_Atencia ;
+                     :what :Rex ;
+                     :where :DomicileManuel ;
+                     :title "Photo de famille de Manuel"^^xsd:string ;
+                     :when "2020-01-09T01:01:01"^^xsd:dateTime .
+
+
+###  https://example.com/ontology#PictureHouseWarmingJulien
+:PictureHouseWarmingJulien rdf:type owl:NamedIndividual ,
+                                    :Picture ;
+                           :creator :Nicolas_Gau ;
+                           :event :HouseWarmingJulien ;
+                           :subject :Julien_Haegman ,
+                                    :Sadok_Ben_Fredj ;
+                           :where :DomicileJulien ;
+                           :title "Photo de Julien et Sadok prise par Nicolas lors de la crémaillère de Julien"^^xsd:string ;
+                           :when "2018-09-01T00:00:00"^^xsd:dateTime .
+
+
+###  https://example.com/ontology#PictureJazzEvent2020
+:PictureJazzEvent2020 rdf:type owl:NamedIndividual ,
+                               :Picture ;
+                      :creator :Manuel_Atencia ;
+                      :event :JazzBarcelone2020 ;
+                      :subject :Nicolas_Gau ;
+                      :title "Photo de Nicolas au festival de jazz"^^xsd:string ;
+                      :when "2019-08-01T00:00:00"^^xsd:dateTime .
+
+
+###  https://example.com/ontology#PictureSelfieNicolas
+:PictureSelfieNicolas rdf:type owl:NamedIndividual ,
+                               :Picture ;
+                      :creator :Nicolas_Gau ;
+                      :event :NewYearsEve ;
+                      :subject :Nicolas_Gau ;
+                      :where :DomicileNicolas ;
+                      :title "Selfie de Nicolas à nouvel an"^^xsd:string ;
+                      :when "2020-01-01T00:00:00"^^xsd:dateTime .
+
+
+###  https://example.com/ontology#PictureStaffUGA
+:PictureStaffUGA rdf:type owl:NamedIndividual ,
+                          :Picture ;
+                 :subject :Fatima_Belounis ,
+                          :Jerome_David ,
+                          :Manuel_Atencia ;
+                 :where :OfficeUGA ;
+                 :title "Photo avec les collègues"^^xsd:string ;
+                 :when "2019-09-25T00:00:00"^^xsd:dateTime .
+
+
+###  https://example.com/ontology#Rex
+:Rex rdf:type owl:NamedIndividual ,
+              :Dog ;
+     :firstName "Rex"^^xsd:string .
+
+
+###  https://example.com/ontology#Sadok_Ben_Fredj
+:Sadok_Ben_Fredj rdf:type owl:NamedIndividual ,
+                          :Male ;
+                 :friend :Julien_Haegman ,
+                         :Nicolas_Gau ;
+                 :livesAt :DomicileSadok ;
+                 :address "1 rue du mage noir"^^xsd:string ;
+                 :birthday "1995-01-01T00:00:00"^^xsd:dateTime ;
+                 :firstName "Sadok"^^xsd:string ;
+                 :lastName "Ben Fredj"^^xsd:string .
+
+
+###  https://example.com/ontology#Sant_Sebastia
+:Sant_Sebastia rdf:type owl:NamedIndividual ,
+                        :Beach ,
+                        :Place ;
+               :city :Barcelone ;
+               :placeName "Sant Sebastia"^^xsd:string .
+
+
+###  https://example.com/ontology#Sassenage
+:Sassenage rdf:type owl:NamedIndividual ,
+                    :City ;
+           :region :Auvergne_Rhone_Alpes ;
+           :placeName "Sassenage"^^xsd:string .
+
+
+###  https://example.com/ontology#Spain
+:Spain rdf:type owl:NamedIndividual ,
+                :Country ;
+       :placeName "Espagne"^^xsd:string ,
+                  "Spain"^^xsd:string .
+
+
+###  https://example.com/ontology#Thales
+:Thales rdf:type owl:NamedIndividual ,
+                 :Company ;
+        :officeLocation :OfficeThales ;
+        :companyName "Thalès"^^xsd:string .
+
+
+###  https://example.com/ontology#TripBarcelone
+:TripBarcelone rdf:type owl:NamedIndividual ,
+                        :Event ;
+               :eventName "Vacances à Barcelone"^^xsd:string .
+
+
+###  https://example.com/ontology#UGA
+:UGA rdf:type owl:NamedIndividual ,
+              :Company ;
+     :officeLocation :OfficeUGA ;
+     :companyName "UGA"^^xsd:string .
+
+
+###  https://example.com/ontology#Xiaomi
+:Xiaomi rdf:type owl:NamedIndividual ,
+                 :Company .
+
+
+###  https://example.com/ontology#Xiaomi_Pocophone_F1
+:Xiaomi_Pocophone_F1 rdf:type owl:NamedIndividual ,
+                              :Phone ;
+                     :manufacturedBy :Xiaomi .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
