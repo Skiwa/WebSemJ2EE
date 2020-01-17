@@ -196,9 +196,12 @@ public class Research {
                     "WHERE {\n" +
                     "  ?picture a ex:Picture;\n" +
                     "           ex:subject ?child.\n" +
+                    "\n" +
                     "  ?child ex:birthday ?birthday.\n" +
+                    "\n" +
                     "  FILTER (\n" +
                     "    ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)<18)\n" +
+                    "  )\n" +
                     "}");
         
         ResultSet rs = qe.execSelect();
@@ -219,13 +222,14 @@ public class Research {
         
         String pref = ("PREFIX ex: <https://example.com/ontology#>\n");
         QueryExecution qe = cnx.query(pref+"SELECT DISTINCT ?picture\n" +
-                    "WHERE {\n" +
-                    " ?picture a ex:Picture;\n" +
-                    " ex:subject ?child.\n" +
-                    " ?child ex:birthday ?birthday.\n" +
-                    " FILTER (\n" +
-                    " ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)>=18)\n" +
-                    "}");
+                        "WHERE {\n" +
+                        " ?picture a ex:Picture;\n" +
+                        " ex:subject ?child.\n" +
+                        " ?child ex:birthday ?birthday.\n" +
+                        " FILTER (\n" +
+                        " ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)>=18)\n" +
+                        " )\n" +
+                        "}");
         
         ResultSet rs = qe.execSelect();
         while (rs.hasNext()) {
