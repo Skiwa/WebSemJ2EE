@@ -116,6 +116,16 @@
             <redirect/>
         </navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+        <description>Back Home</description>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>back-home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+            <redirect/>  
+        </navigation-case>
+    </navigation-rule>
 
      <navigation-rule>
         <description>Delete user</description>
