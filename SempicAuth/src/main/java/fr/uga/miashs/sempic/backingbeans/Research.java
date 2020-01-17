@@ -119,10 +119,23 @@ public class Research {
         
     }
     
-    //Recherche photos avec 2 personnes données
-    //TODO : A changer plus tard pour ajouter X et Y (param)
+    //Recherche photos avec 2 personnes données X et Y
+    //TODO : Retravailler la query 
     public void searchWithXandY(){
         System.out.println("Request searchWithXandY");
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String nameProperty1 = request.getParameter("nameProp1");
+        String nameProperty2 = request.getParameter("nameProp2");
+        
+        String name1 = nameProperty1.substring(nameProperty1.indexOf(" ")+1);
+        String firstname1 = nameProperty1.substring(0,nameProperty1.indexOf(" "));
+        
+        String name2 = nameProperty2.substring(nameProperty2.indexOf(" ")+1);
+        String firstname2 = nameProperty2.substring(0,nameProperty2.indexOf(" "));
+        
+        //System.out.println("P1 : "+firstname1+" "+name1);
+        //System.out.println("P2 : "+firstname2+" "+name2);
         
         RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
         
@@ -130,8 +143,7 @@ public class Research {
         QueryExecution qe = cnx.query(pref+"SELECT ?picture\n" +
                     "WHERE {\n" +
                     " ?picture a ex:Picture;\n" +
-                    "     ex:subject ex:Manuel_Atencia;\n" +
-                    "     ex:subject ex:Jerome_David.\n" +
+                    "     ex:subject ?p1.\n" +
                     "}");
         
         ResultSet rs = qe.execSelect();
@@ -157,7 +169,6 @@ public class Research {
                         "WHERE {\n" +
                         " ?picture a ex:Picture;\n" +
                         "     ex:what ?animal.\n" +
-                        "\n" +
                         "  ?animal a ?animalType.\n" +
                         "  ?animalType rdfs:subClassOf ex:Animal\n" +
                         "}");
@@ -172,8 +183,7 @@ public class Research {
         
     }
     
-    //Recherche photos avec l'animal de X (ici Manuel) 
-    //TODO : A changer plus tard pour ajouter X (param)
+    //Recherche photos avec l'animal de X
     public void searchWithAnimalsofX(){
         System.out.println("Request searchWithAnimalsofX");
         
@@ -223,12 +233,9 @@ public class Research {
                     "WHERE {\n" +
                     "  ?picture a ex:Picture;\n" +
                     "           ex:subject ?child.\n" +
-                    "\n" +
                     "  ?child ex:birthday ?birthday.\n" +
-                    "\n" +
                     "  FILTER (\n" +
                     "    ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)<18)\n" +
-                    "  )\n" +
                     "}");
         
         ResultSet rs = qe.execSelect();
@@ -255,7 +262,6 @@ public class Research {
                     " ?child ex:birthday ?birthday.\n" +
                     " FILTER (\n" +
                     " ((((DAY(?birthday) - DAY(NOW())) * 24)) < 157680) && (YEAR(NOW())-YEAR(?birthday)>=18)\n" +
-                    " )\n" +
                     "}");
         
         ResultSet rs = qe.execSelect();
@@ -280,11 +286,9 @@ public class Research {
                 "  ?picture a ex:Picture;\n" +
                 "      ex:subject ?person;\n" +
                 "      ex:subject ?personFriend.\n" +
-                "\n" +
                 "  ?person a ?personType.\n" +
                 "  ?personFriend a ?personType.\n" +
                 "  ?personType rdfs:subClassOf ex:Person.\n" +
-                "\n" +
                 "  ?person ex:friend ?personFriend.\n" +
                 "  ?personFriend ex:friend ?person.\n" +
                 "}");
@@ -298,10 +302,15 @@ public class Research {
         cnx.close();
     }
     
-    //Recherche photos avec seulement des gens amis de X (ici Sadok)
-    //TODO : Arranger pour ajouter une personne X
+    //Recherche photos avec seulement des gens amis de X
     public void searchWithOnlyFriendsofX(){
         System.out.println("Request searchWithOnlyFriendsofX");
+        
+        HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        String nameProperty = request.getParameter("nameUserFriend");
+        
+        String name = nameProperty.substring(nameProperty.indexOf(" ")+1);
+        String firstname = nameProperty.substring(0,nameProperty.indexOf(" "));
         
         RDFConnection cnx = RDFConnectionFactory.connect(ENDPOINT_QUERY, ENDPOINT_UPDATE, ENDPOINT_GSP);
         
@@ -311,11 +320,13 @@ public class Research {
                         "WHERE {\n" +
                         "  ?picture a ex:Picture;\n" +
                         "      ex:subject ?person.\n" +
-                        "\n" +
                         "  ?person a ?personType.\n" +
                         "  ?personType rdfs:subClassOf ex:Person.\n" +
-                        "\n" +
-                        "  ?person ex:friend ex:Sadok_Ben_Fredj.\n" +
+                        "  ?person ex:friend ?ami .\n" +
+                        "  ?ami ex:firstName ?amiFirstName.\n"+
+                        "  ?ami ex:lastName ?amiLastName.\n"+
+                        "   FILTER(?amiFirstName = '"+firstname+"')\n"+
+                        "   FILTER(?amiLastName = '"+name+"')"+
                         "}");
         
         ResultSet rs = qe.execSelect();
