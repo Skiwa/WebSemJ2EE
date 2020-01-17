@@ -39,19 +39,17 @@ and open the template in the editor.
                                   </h:form>
                             <td>
                                 <h:form>
-                                    
-                                    <h:commandButton value="Ajouter Annotation" action="#{createAnnotation.createAnnotation(sessionTools.connectedUser)}">
-                                    <f:param name="userId" value="#{user.id}"/>
-                                    <f:param name="idPicture" value="#{picture.id}" /> 
-                                    <f:param name="idAlbum" value="#{param.idAlbum}" />
-                                </h:commandButton>
+                                 
+                                <h:button outcome="create-annotation" value="Ajouter une annotation">
+                                    <f:param name="idPicture" value="#{picture.id}"/>
+                                </h:button>
                                 </h:form>
                             </td>   
                             </td>
                         </tr>
                     </c:forEach>
             </table>
-        
+       
         
         <h:button outcome="create-picture" value="Ajouter une photo"><f:param name="idAlbum" value="#{param.idAlbum}"/></h:button>
         <h:button outcome="back-home" value="Retour"/>

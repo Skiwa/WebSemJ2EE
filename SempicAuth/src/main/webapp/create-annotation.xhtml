@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <title>Create annotation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Photo</th>
+                <th>ex:subject</th>
+                <th>Annotate</th>
+            </tr>
+        
+        <h:form id="formBody">
+            
+            <td>
+                <h:outputText value="#{param.idPicture}"/>
+            </td>
+            <td>
+                <label for="person">Person</label>
+                <input type="text" name="person"/>   
+            </td>
+            <td>
+                <h:commandButton value="Annotate Subject" action="#{createAnnotation.annotateSubject()}">
+                <f:param name="idPicture" value="#{param.idPicture}" />
+                </h:commandButton>
+            </td>
+         
+        </h:form>
+        </table>
+        <table>
+            <tr>
+                <th>Photo</th>
+                <th>ex:subject</th>
+                <th>Annotate</th>
+            </tr>
+        <h:form id="formHeader">
+            <td>
+                <h:outputText value="#{param.idPicture}"/>
+            </td>
+            <td>
+                <label for="place">Localisation</label>
+                <input type="text" name="place"/>  
+            </td>
+            <td>
+                <h:commandButton value="Annotate Place" action="#{createAnnotation.annotatePlace()}">
+                <f:param name="idPicture" value="#{param.idPicture}" />
+                </h:commandButton>
+            </td>
+        </h:form>
+        </table>
+    </body>
+</html>
